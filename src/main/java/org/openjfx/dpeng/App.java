@@ -17,10 +17,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("fxml/login.fxml"));
-        Parent rootLogin = loginLoader.load();
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("fxml/appMenu.fxml"));
+        Parent rootMenu = loginLoader.load();
 
-        scene = new Scene(rootLogin);
+        scene = new Scene(rootMenu);
         stage.setScene(scene);
 
         Image logo = new Image(getClass().getResourceAsStream("images/AppImage/logo.png"));
@@ -28,6 +28,7 @@ public class App extends Application {
 
         stage.setTitle("DPeng demoooooooooooooooo");
 
+        stage.resizableProperty().set(false);
         stage.show();
     }
 

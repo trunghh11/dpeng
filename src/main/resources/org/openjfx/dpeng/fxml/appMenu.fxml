@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.AppController">
+   <children>
+      <ImageView fitHeight="76.0" fitWidth="55.0" layoutX="21.0" layoutY="633.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
+         <image>
+            <Image url="@../images/TranslatorImage/egg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="37.0" layoutX="971.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="-40.6">
+         <image>
+            <Image url="@../images/TranslatorImage/egg.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="50.0" layoutY="80.0" prefHeight="100.0" prefWidth="980.0" styleClass="backgroundMenuBar">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="translateButton" cache="true" mnemonicParsing="false" onAction="#switchToTranslateView" text="Dịch" textOverrun="CLIP">
+                     <font>
+                        <Font name="Arial Bold" size="72.0" />
+                     </font>
+                     <rotationAxis>
+                        <Point3D />
+                     </rotationAxis>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="buttonMenuBar" />
+                        <String fx:value="active" />
+                        <String fx:value="hoverCursor" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="vocaButton" mnemonicParsing="false" onAction="#switchToVocaView" text="Từ vựng">
+                     <styleClass>
+                        <String fx:value="buttonMenuBar" />
+                        <String fx:value="hoverCursor" />
+                     </styleClass></Button>
+                  <Button fx:id="gameButton" mnemonicParsing="false" onAction="#switchToGameView" text="Game">
+                     <styleClass>
+                        <String fx:value="buttonMenuBar" />
+                        <String fx:value="hoverCursor" />
+                     </styleClass></Button>
+                  <Button fx:id="dictButton" mnemonicParsing="false" onAction="#switchToDictView" text="Từ điển">
+                     <styleClass>
+                        <String fx:value="buttonMenuBar" />
+                        <String fx:value="hoverCursor" />
+                     </styleClass></Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="appAnchor" layoutX="50.0" layoutY="200.0" prefHeight="495.0" prefWidth="980.0" />
+      <ImageView fitHeight="131.0" fitWidth="126.0" layoutX="947.0" layoutY="584.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/TranslatorImage/dinoWithEggs.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="48.0" layoutX="911.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" rotate="26.6">
+         <image>
+            <Image url="@../images/TranslatorImage/egg.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
