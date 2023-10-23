@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 /**
- * JavaFX App
+ * JavaFX App.
  */
 public class App extends Application {
 
@@ -17,8 +17,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("fxml/appMenu.fxml"));
-        Parent rootMenu = loginLoader.load();
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("fxml/appMenu.fxml"));
+        Parent rootMenu = menuLoader.load();
 
         scene = new Scene(rootMenu);
         stage.setScene(scene);

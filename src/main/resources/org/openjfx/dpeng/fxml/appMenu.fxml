@@ -26,7 +26,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="translateButton" cache="true" mnemonicParsing="false" onAction="#switchToTranslateView" text="Dịch" textOverrun="CLIP">
+                  <Button fx:id="translateButton" accessibleRole="RADIO_BUTTON" cache="true" mnemonicParsing="false" onAction="#switchToTranslateView" text="Dịch" textOverrun="CLIP">
                      <font>
                         <Font name="Arial Bold" size="72.0" />
                      </font>
@@ -42,17 +42,17 @@
                         <String fx:value="hoverCursor" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="vocaButton" mnemonicParsing="false" onAction="#switchToVocaView" text="Từ vựng">
+                  <Button fx:id="vocaButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToVocaView" text="Từ vựng">
                      <styleClass>
                         <String fx:value="buttonMenuBar" />
                         <String fx:value="hoverCursor" />
                      </styleClass></Button>
-                  <Button fx:id="gameButton" mnemonicParsing="false" onAction="#switchToGameView" text="Game">
+                  <Button fx:id="gameButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToGameView" text="Game">
                      <styleClass>
                         <String fx:value="buttonMenuBar" />
                         <String fx:value="hoverCursor" />
                      </styleClass></Button>
-                  <Button fx:id="dictButton" mnemonicParsing="false" onAction="#switchToDictView" text="Từ điển">
+                  <Button fx:id="dictButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToDictView" text="Từ điển">
                      <styleClass>
                         <String fx:value="buttonMenuBar" />
                         <String fx:value="hoverCursor" />
