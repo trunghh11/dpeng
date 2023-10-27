@@ -40,22 +40,26 @@
                         <String fx:value="buttonMenuBar" />
                         <String fx:value="active" />
                         <String fx:value="hoverCursor" />
+                        <String fx:value="pressEffect" />
                      </styleClass>
                   </Button>
                   <Button fx:id="vocaButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToVocaView" text="Từ vựng">
                      <styleClass>
                         <String fx:value="buttonMenuBar" />
                         <String fx:value="hoverCursor" />
+                        <String fx:value="pressEffect" />
                      </styleClass></Button>
                   <Button fx:id="gameButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToGameView" text="Game">
                      <styleClass>
                         <String fx:value="buttonMenuBar" />
                         <String fx:value="hoverCursor" />
+                        <String fx:value="pressEffect" />
                      </styleClass></Button>
                   <Button fx:id="dictButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToDictView" text="Từ điển">
                      <styleClass>
                         <String fx:value="buttonMenuBar" />
                         <String fx:value="hoverCursor" />
+                        <String fx:value="pressEffect" />
                      </styleClass></Button>
                </children>
             </HBox>
