@@ -4,14 +4,25 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 public class AppController implements Initializable {
     // private boolean isTranslate, isVoca, isGame, isDict;
+    private static boolean isMenuOn = false;
+    private static Timeline menuSlideInAnimation;
+    private static Timeline menuSlideOutAnimation;
 
     @FXML
     private AnchorPane appAnchor;
@@ -19,6 +30,21 @@ public class AppController implements Initializable {
     public AnchorPane getAppAnchor() {
         return appAnchor;
     }
+
+    @FXML
+    private Label menuLabel, translateLabel, vocaLabel, gameLabel, dictLabel;
+    
+    @FXML
+    private AnchorPane appBackground;
+
+    @FXML
+    private AnchorPane appWrapper;
+
+    @FXML
+    private AnchorPane appMenu;
+
+    @FXML
+    private Button menuButton;
 
     @FXML
     private Button translateButton;
@@ -32,10 +58,71 @@ public class AppController implements Initializable {
     @FXML
     private Button dictButton;
 
+    @FXML
+    void hideMenuWhenCick(MouseEvent event) {
+        if (isMenuOn) {
+            slideOutMenu();
+        }
+    }
+
+    @FXML
+    void slideMenu(ActionEvent event) {
+        if (!isMenuOn) {
+            slideInMenu();
+        } else {
+            slideOutMenu();
+        }
+    }
+
+    private void slideInMenu() {
+        isMenuOn = true;
+        menuSlideInAnimation.play();
+        menuSlideInAnimation.setOnFinished(event -> {
+            menuLabel.setText("MENU");
+            translateLabel.setText("DỊCH");
+            vocaLabel.setText("TỪ VỰNG");
+            gameLabel.setText("GAME");
+            dictLabel.setText("TỪ ĐIỂN");
+        });
+
+        appBackground.setOpacity(0.2);
+        
+        appMenu.getStyleClass().removeAll("backGround_0_7");
+        appMenu.getStyleClass().add("backGround_0_9");
+
+        appWrapper.setDisable(true);
+    }
+
+    private void slideOutMenu() {
+        isMenuOn = false;
+        menuLabel.setText(null);
+        translateLabel.setText(null);
+        vocaLabel.setText(null);
+        gameLabel.setText(null);
+        dictLabel.setText(null);
+        menuSlideOutAnimation.play();
+        menuSlideOutAnimation.setOnFinished(event -> {
+            menuLabel.setText(null);
+            translateLabel.setText(null);
+            vocaLabel.setText(null);
+            gameLabel.setText(null);
+            dictLabel.setText(null);
+        });
+
+        appBackground.setOpacity(1);
+        
+        appMenu.getStyleClass().removeAll("backGround_0_9");
+        appMenu.getStyleClass().add("backGround_0_7");
+        
+        appWrapper.setDisable(false);
+    }
 
     @FXML
     private void switchToTranslateView(ActionEvent event) {
         try {
+            if (isMenuOn) {
+                slideOutMenu();
+            }
             FXMLLoader translateLoader = new FXMLLoader(getClass().getResource("fxml/translate.fxml"));
             AnchorPane rootTranslate = translateLoader.load();
 
@@ -55,6 +142,9 @@ public class AppController implements Initializable {
     @FXML
     private void switchToVocaView(ActionEvent event) {
         try {
+            if (isMenuOn) {
+                slideOutMenu();
+            }
             FXMLLoader vocaLoader = new FXMLLoader(getClass().getResource("fxml/vocabulary.fxml"));
             AnchorPane rootVoca = vocaLoader.load();
 
@@ -74,6 +164,9 @@ public class AppController implements Initializable {
     @FXML
     private void switchToGameView(ActionEvent event) {
         try {
+            if (isMenuOn) {
+                slideOutMenu();
+            }
             FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("fxml/game.fxml"));
             AnchorPane rootGame = gameLoader.load();
 
@@ -94,6 +187,9 @@ public class AppController implements Initializable {
     @FXML
     private void switchToDictView(ActionEvent event) {
         try {
+            if (isMenuOn) {
+                slideOutMenu();
+            }
             FXMLLoader dictLoader = new FXMLLoader(getClass().getResource("fxml/dictionary.fxml"));
             AnchorPane rootDict = dictLoader.load();
 
@@ -123,6 +219,45 @@ public class AppController implements Initializable {
         catch (IOException e) {
             e.printStackTrace();
         }
+
+        FadeTransition fadeBackground = new FadeTransition(Duration.millis(350), appBackground);
+        appBackground.opacityProperty().addListener((observable, oldValue, newValue) -> {
+            double oldOpacity = (double) oldValue;
+            double newOpacity = (double) newValue;
+        
+            // Thực hiện các animation tương ứng với thay đổi opacity
+            fadeBackground.setFromValue(oldOpacity);
+            fadeBackground.setToValue(newOpacity);
+            fadeBackground.setInterpolator(Interpolator.LINEAR);
+            fadeBackground.play();
+        });
+
+        // SlideIn animation
+        menuSlideInAnimation = new Timeline();
+        Duration duration = Duration.seconds(0.25); // Thời gian animation (2 giây)
+
+        // Tạo KeyValue cho bước chuyển đổi chiều rộng
+        KeyValue keyValue = new KeyValue(appMenu.prefWidthProperty(), 265);
+
+        // Tạo KeyFrame cho bước chuyển đổi chiều rộng
+        KeyFrame keyFrame = new KeyFrame(duration, keyValue);
+
+        // Thêm KeyFrame vào Timeline
+        menuSlideInAnimation.getKeyFrames().add(keyFrame);
+
+        //SlideOut Animation
+        menuSlideOutAnimation = new Timeline();
+        Duration duration2 = Duration.seconds(0.25); // Thời gian animation (2 giây)
+
+        // Tạo KeyValue cho bước chuyển đổi chiều rộng
+        KeyValue keyValue2 = new KeyValue(appMenu.prefWidthProperty(), 110);
+
+        // Tạo KeyFrame cho bước chuyển đổi chiều rộng
+        KeyFrame keyFrame2 = new KeyFrame(duration2, keyValue2);
+
+        // Thêm KeyFrame vào Timeline
+        menuSlideOutAnimation.getKeyFrames().add(keyFrame2);
+
     }
 
 }

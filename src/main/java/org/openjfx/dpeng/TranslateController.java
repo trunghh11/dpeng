@@ -220,9 +220,9 @@ public class TranslateController implements Initializable {
         Translation translation = translate.translate(
             inputArea.getText(),
             Translate.TranslateOption.sourceLanguage(currentSourceLang),
-            Translate.TranslateOption.targetLanguage(currentTargetLang)
+            Translate.TranslateOption.targetLanguage(currentTargetLang),
+            Translate.TranslateOption.format("text")
         );
-
         translateArea.setText(translation.getTranslatedText());
 
         currentInput = inputArea.getText();

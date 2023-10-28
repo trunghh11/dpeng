@@ -12,6 +12,50 @@
     -fx-opacity: 1;
 }
 
+/* Menu Side bar CSS*/
+.backGround_0_7 {
+    -fx-background-color: rgba(255, 255, 255, 0.7);
+}
+
+.backGround_0_9 {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+}
+
+.sideBar {
+    -fx-background-radius: 0 30 30 0;
+    -fx-background-insets : 0 3 0 0;
+    -fx-border-radius: 0 30 30 0;
+    -fx-border-width: 6 6 6 0;
+    -fx-border-color: #333;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0, 6, 0);
+}
+
+.menuButton {
+    -fx-background-radius: 0 26 0 0;
+    -fx-border-color: #666;
+    -fx-border-width: 0 0 3px 0;
+}
+
+.buttonMenuBar {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.hoverMenu:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #7D42F125;
+    -fx-opacity: 0.8;
+}
+
+.buttonMenuBar.active {
+    -fx-opacity: 1;
+    -fx-background-color: #7D42F150;
+}
+
+.buttonMenuBar.active .label {
+    -fx-text-fill: white;
+}
+
 /* Translator CSS */
 .backgroundGradient {
     -fx-background-color: linear-gradient(to right, #fff7ad, #ffa9f9);
@@ -20,23 +64,6 @@
 .backgroundMenuBar {
     -fx-background-color: rgba(125, 66, 241, 0.2);
     -fx-background-radius: 20;
-}
-
-.buttonMenuBar {
-    -fx-pref-width: 195px;
-    -fx-pref-height: 60px;
-    -fx-background-color: #7D42F1;
-    -fx-background-radius: 25;
-    -fx-background-insets : 3px;
-    -fx-border-radius: 25;
-    -fx-border-width: 4px;
-    -fx-border-color: white;
-    -fx-text-fill: #fff;
-    -fx-text-alignment: center;
-    /* -fx-font-family: 'Arial'; */
-    /* -fx-font-weight: bold; */
-    -fx-font-size: 22px;
-    -fx-opacity: 0.45;
 }
 
 .buttonLanguage {
@@ -56,13 +83,13 @@
 }
 
 .buttonTranslate {
-    -fx-pref-width: 95px;
+    -fx-pref-width: 140px;
     -fx-pref-height: 50px;
     -fx-background-color: #7D42F1;
     -fx-background-radius: 25;
-    -fx-background-insets : 3px;
+    -fx-background-insets : 2px;
     -fx-border-radius: 25;
-    -fx-border-width: 4px;
+    -fx-border-width: 3px;
     -fx-border-color: #999;
     -fx-text-fill: #fff;
     -fx-text-alignment: center;
@@ -75,16 +102,7 @@
     -fx-translate-y: -1px;
 } */
 
-.buttonMenuBar:hover {
-    -fx-opacity: 0.8;
-}
 
-
-.buttonMenuBar.active {
-    -fx-opacity: 1;
-    -fx-effect: dropshadow( gaussian , #7D42F1 , 4,0,0,1 );
-
-}
 
 
 .reverseButton {
@@ -109,7 +127,7 @@
     -fx-pref-height: 370px;
     -fx-border-radius: 35;
     -fx-background-color: #fff;
-    -fx-padding: 10 10 60 10;
+    -fx-padding: 10 10 70 10;
     -fx-font-size: 20px;
     -fx-opacity: 1;
     /* -fx-font-family: 'Arial Unicode MS'; */
@@ -124,4 +142,56 @@
 }
 .textArea .scroll-pane .content{
     -fx-background-color: transparent;
+}
+
+/* Scroll bar CSS */
+.textArea .scroll-bar:horizontal .track,
+.textArea .scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :2.0em;
+}
+
+
+.textArea .scroll-bar:horizontal .increment-button ,
+.textArea .scroll-bar:horizontal .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 0.0 8.0 0.0;
+
+}
+
+.textArea .scroll-bar:vertical .increment-button ,
+.textArea .scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 8.0 0.0 0.0;
+
+}
+
+ .textArea .scroll-bar .increment-arrow,
+ .textArea .scroll-bar .decrement-arrow{
+    -fx-shape : " ";    
+    -fx-padding :0.15em 0.0;
+}
+
+ .textArea .scroll-bar:vertical .increment-arrow,
+ .textArea .scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";    
+    -fx-padding :0.0 0.15em;
+}
+
+.textArea .scroll-bar:horizontal .thumb,
+.textArea .scroll-bar:vertical .thumb {
+    -fx-background-color :derive(black,100.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+.textArea .scroll-bar:horizontal .thumb:hover,
+.textArea .scroll-bar:vertical .thumb:hover {
+    -fx-background-color :derive(#4D4C4F,5.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
 }

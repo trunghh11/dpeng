@@ -9,18 +9,18 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="495.0" maxWidth="980.0" prefHeight="495.0" prefWidth="980.0" styleClass="transparentBg" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.TranslateController">
+<AnchorPane prefHeight="600.0" prefWidth="940.0" styleClass="transparentBg" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.TranslateController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="495.0" prefWidth="465.0" styleClass="textAreaWrap" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="515.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefWidth="445.0" styleClass="textAreaWrap" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TextArea fx:id="inputArea" layoutX="22.0" layoutY="74.0" onKeyTyped="#whenInputTranslate" prefHeight="400.0" prefWidth="421.0" promptText="Nhập vào đây..." styleClass="textArea" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="75.0">
                <padding>
                   <Insets top="10.0" />
                </padding>
             </TextArea>
-            <Button fx:id="inputSound" layoutX="38.0" layoutY="432.0" mnemonicParsing="false" onAction="#playInputSound">
+            <Button fx:id="inputSound" layoutX="48.0" layoutY="526.0" mnemonicParsing="false" onAction="#playInputSound" prefHeight="38.0" prefWidth="54.0">
                <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="pressEffect">
+                  <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="pressEffect">
                      <image>
                         <Image url="@../images/TranslatorImage/soundPlay.png" />
                      </image>
@@ -33,7 +33,7 @@
                </styleClass>
             </Button>
             <Button fx:id="sourceLang" layoutX="178.0" layoutY="6.0" mnemonicParsing="false" styleClass="buttonLanguage" text="Anh" />
-            <Button fx:id="translateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="186.0" layoutY="422.0" mnemonicParsing="false" onAction="#translate" text="Dịch">
+            <Button fx:id="translateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="520.0" mnemonicParsing="false" onAction="#translate" text="Dịch">
                <styleClass>
                   <String fx:value="buttonTranslate" />
                   <String fx:value="hoverCursor" />
@@ -42,7 +42,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="reverseLangButton" layoutX="459.0" layoutY="24.0" mnemonicParsing="false" onAction="#reverseLanguage" prefHeight="45.0" prefWidth="45.0">
+      <Button fx:id="reverseLangButton" layoutX="439.0" layoutY="23.0" mnemonicParsing="false" onAction="#reverseLanguage" prefHeight="45.0" prefWidth="45.0">
          <graphic>
             <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <viewport>
@@ -60,30 +60,30 @@
             <String fx:value="pressEffect" />
          </styleClass>
       </Button>
-      <AnchorPane layoutX="515.0" layoutY="10.0" prefHeight="495.0" prefWidth="465.0" styleClass="textAreaWrap" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="515.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="515.0" layoutY="10.0" prefWidth="445.0" styleClass="textAreaWrap" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TextArea fx:id="translateArea" editable="false" layoutX="23.0" layoutY="75.0" prefHeight="400.0" prefWidth="421.0" promptText="Bản dịch" styleClass="textArea" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="75.0">
                <padding>
                   <Insets top="10.0" />
                </padding>
             </TextArea>
-            <Button fx:id="translateSound" layoutX="35.0" layoutY="434.0" mnemonicParsing="false" onAction="#playTranslateSound">
+            <Button fx:id="translateSound" layoutX="48.0" layoutY="525.0" mnemonicParsing="false" onAction="#playTranslateSound">
                <styleClass>
                   <String fx:value="transparentBg" />
                   <String fx:value="hoverCursor" />
                   <String fx:value="pressEffect" />
                </styleClass>
                <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" styleClass="pressEffect">
+                  <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="pressEffect">
                      <image>
                         <Image url="@../images/TranslatorImage/soundPlay.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="copyButton" layoutX="83.0" layoutY="435.0" mnemonicParsing="false" onAction="#copyTranslateToClipbroad">
+            <Button fx:id="copyButton" layoutX="106.0" layoutY="527.0" mnemonicParsing="false" onAction="#copyTranslateToClipbroad">
                <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/TranslatorImage/copyIcon.png" />
                      </image>

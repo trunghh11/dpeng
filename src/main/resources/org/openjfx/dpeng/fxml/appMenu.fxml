@@ -2,79 +2,198 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.AppController">
    <children>
-      <ImageView fitHeight="76.0" fitWidth="55.0" layoutX="21.0" layoutY="633.0" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
-         <image>
-            <Image url="@../images/TranslatorImage/egg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="53.0" fitWidth="37.0" layoutX="971.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" rotate="-40.6">
-         <image>
-            <Image url="@../images/TranslatorImage/egg.png" />
-         </image>
-      </ImageView>
-      <AnchorPane layoutX="50.0" layoutY="80.0" prefHeight="100.0" prefWidth="980.0" styleClass="backgroundMenuBar">
+      <AnchorPane fx:id="appBackground" onMouseClicked="#hideMenuWhenCick" styleClass="transparentBg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="appWrapper" layoutX="7.164404392242432" layoutY="-7.318980693817139" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="translateButton" accessibleRole="RADIO_BUTTON" cache="true" mnemonicParsing="false" onAction="#switchToTranslateView" text="Dịch" textOverrun="CLIP">
-                     <font>
-                        <Font name="Arial Bold" size="72.0" />
-                     </font>
-                     <rotationAxis>
-                        <Point3D />
-                     </rotationAxis>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <styleClass>
-                        <String fx:value="buttonMenuBar" />
-                        <String fx:value="active" />
-                        <String fx:value="hoverCursor" />
-                        <String fx:value="pressEffect" />
-                     </styleClass>
-                  </Button>
-                  <Button fx:id="vocaButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToVocaView" text="Từ vựng">
-                     <styleClass>
-                        <String fx:value="buttonMenuBar" />
-                        <String fx:value="hoverCursor" />
-                        <String fx:value="pressEffect" />
-                     </styleClass></Button>
-                  <Button fx:id="gameButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToGameView" text="Game">
-                     <styleClass>
-                        <String fx:value="buttonMenuBar" />
-                        <String fx:value="hoverCursor" />
-                        <String fx:value="pressEffect" />
-                     </styleClass></Button>
-                  <Button fx:id="dictButton" accessibleRole="RADIO_BUTTON" mnemonicParsing="false" onAction="#switchToDictView" text="Từ điển">
-                     <styleClass>
-                        <String fx:value="buttonMenuBar" />
-                        <String fx:value="hoverCursor" />
-                        <String fx:value="pressEffect" />
-                     </styleClass></Button>
+                  <ImageView fitHeight="76.0" fitWidth="55.0" layoutX="22.0" layoutY="636.0742297172546" pickOnBounds="true" preserveRatio="true" rotate="-45.0">
+                     <image>
+                        <Image url="@../images/TranslatorImage/egg.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="53.0" fitWidth="37.0" layoutX="968.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" rotate="-26.6">
+                     <image>
+                        <Image url="@../images/TranslatorImage/egg.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane fx:id="appAnchor" layoutX="116.83559560775757" layoutY="87.31898069381714" prefHeight="600.0" prefWidth="940.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0" />
+                  <ImageView fitHeight="109.0" fitWidth="105.0" layoutX="968.8355956077576" layoutY="603.3189806938171" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/TranslatorImage/dinoWithEggs.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="60.0" fitWidth="48.0" layoutX="931.4982542991638" pickOnBounds="true" preserveRatio="true" rotate="26.6">
+                     <image>
+                        <Image url="@../images/TranslatorImage/egg.png" />
+                     </image>
+                  </ImageView>
                </children>
-            </HBox>
+            </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="appAnchor" layoutX="50.0" layoutY="200.0" prefHeight="495.0" prefWidth="980.0" />
-      <ImageView fitHeight="131.0" fitWidth="126.0" layoutX="947.0" layoutY="584.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/TranslatorImage/dinoWithEggs.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="48.0" layoutX="911.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" rotate="26.6">
-         <image>
-            <Image url="@../images/TranslatorImage/egg.png" />
-         </image>
-      </ImageView>
+      <AnchorPane fx:id="appMenu" prefHeight="720.0" prefWidth="110.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="128.0">
+               <children>
+                  <Button fx:id="translateButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToTranslateView" prefHeight="100.0" prefWidth="0.0">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/AppImage/translateIcon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="11.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label fx:id="translateLabel">
+                                 <font>
+                                    <Font name="Arial Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="transparentBg" />
+                        <String fx:value="hoverMenu" />
+                        <String fx:value="pressEffect" />
+                        <String fx:value="buttonMenuBar" />
+                        <String fx:value="active" />
+                     </styleClass>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="vocaButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToVocaView" prefHeight="100.0" prefWidth="0.0">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/AppImage/flashCardIcon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="11.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label fx:id="vocaLabel" wrapText="true">
+                                 <font>
+                                    <Font name="Arial Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="transparentBg" />
+                        <String fx:value="hoverMenu" />
+                        <String fx:value="pressEffect" />
+                        <String fx:value="buttonMenuBar" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="gameButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToGameView" prefHeight="100.0" prefWidth="0.0">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/AppImage/gameIcon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="11.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label fx:id="gameLabel">
+                                 <font>
+                                    <Font name="Arial Bold" size="30.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="transparentBg" />
+                        <String fx:value="hoverMenu" />
+                        <String fx:value="pressEffect" />
+                        <String fx:value="buttonMenuBar" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="dictButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToDictView" prefHeight="100.0" prefWidth="0.0">
+                     <graphic>
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/AppImage/dictIcon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="11.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Label fx:id="dictLabel">
+                                 <font>
+                                    <Font name="Arial Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="transparentBg" />
+                        <String fx:value="hoverMenu" />
+                        <String fx:value="pressEffect" />
+                        <String fx:value="buttonMenuBar" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
+            <Button fx:id="menuButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#slideMenu" prefHeight="100.0" prefWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/AppImage/menuIcon.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="11.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="menuLabel" textFill="#7d42f1">
+                           <font>
+                              <Font name="Arial Bold" size="40.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </graphic>
+               <styleClass>
+                  <String fx:value="transparentBg" />
+                  <String fx:value="menuButton" />
+                  <String fx:value="hoverMenu" />
+               </styleClass>
+            </Button>
+         </children>
+         <styleClass>
+            <String fx:value="sideBar" />
+            <String fx:value="backGround_0_7" />
+         </styleClass>
+      </AnchorPane>
    </children>
 </AnchorPane>
