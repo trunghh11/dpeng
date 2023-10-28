@@ -2,6 +2,7 @@ package org.openjfx.dpeng;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -27,6 +28,12 @@ public class App extends Application {
         stage.getIcons().add(logo);
 
         stage.setTitle("DPeng demoooooooooooooooo");
+
+        // rootMenu.setOnMouseClicked(event -> {
+        //     Node clickedNode = (Node) event.getTarget();
+        //     System.out.println("Đã click vào phần tử: " + clickedNode);
+        //     // Thực hiện hành động khác tại đây (nếu cần)
+        // });
 
         stage.resizableProperty().set(false);
         stage.show();

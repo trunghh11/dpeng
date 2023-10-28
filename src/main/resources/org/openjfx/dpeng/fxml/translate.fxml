@@ -18,7 +18,7 @@
                   <Insets top="10.0" />
                </padding>
             </TextArea>
-            <Button fx:id="inputSound" layoutX="48.0" layoutY="526.0" mnemonicParsing="false" onAction="#playInputSound" prefHeight="38.0" prefWidth="54.0">
+            <Button fx:id="inputSound" layoutX="325.0" layoutY="467.0" mnemonicParsing="false" onAction="#playInputSound" prefHeight="38.0" prefWidth="54.0">
                <graphic>
                   <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="pressEffect">
                      <image>
@@ -33,7 +33,7 @@
                </styleClass>
             </Button>
             <Button fx:id="sourceLang" layoutX="178.0" layoutY="6.0" mnemonicParsing="false" styleClass="buttonLanguage" text="Anh" />
-            <Button fx:id="translateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="520.0" mnemonicParsing="false" onAction="#translate" text="Dịch">
+            <Button fx:id="translateButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="522.0" mnemonicParsing="false" onAction="#translate" text="Dịch">
                <styleClass>
                   <String fx:value="buttonTranslate" />
                   <String fx:value="hoverCursor" />
