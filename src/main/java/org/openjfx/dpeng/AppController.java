@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 public class AppController implements Initializable {
     // private boolean isTranslate, isVoca, isGame, isDict;
@@ -31,9 +33,15 @@ public class AppController implements Initializable {
         return appAnchor;
     }
 
-    @FXML
-    private Label menuLabel, translateLabel, vocaLabel, gameLabel, dictLabel;
+    private Label menuLabel = new Label("MENU"),
+            translateLabel = new Label("DỊCH"),
+            vocaLabel = new Label("TỪ VỰNG"),
+            gameLabel = new Label("GAME"),
+            dictLabel = new Label("TỪ ĐIỂN");
     
+    @FXML
+    private HBox menuHBox, translateHBox, vocaHBox, gameHBox, dictHBox;
+
     @FXML
     private AnchorPane appBackground;
 
@@ -67,6 +75,11 @@ public class AppController implements Initializable {
 
     @FXML
     void slideMenu(ActionEvent event) {
+        boolean isSlidingMenu = (menuSlideInAnimation.getStatus() == Animation.Status.RUNNING 
+                        || menuSlideOutAnimation.getStatus() == Animation.Status.RUNNING);
+
+        if (isSlidingMenu) return;
+        
         if (!isMenuOn) {
             slideInMenu();
         } else {
@@ -78,11 +91,11 @@ public class AppController implements Initializable {
         isMenuOn = true;
         menuSlideInAnimation.play();
         menuSlideInAnimation.setOnFinished(event -> {
-            menuLabel.setText("MENU");
-            translateLabel.setText("DỊCH");
-            vocaLabel.setText("TỪ VỰNG");
-            gameLabel.setText("GAME");
-            dictLabel.setText("TỪ ĐIỂN");
+            menuHBox.getChildren().add(menuLabel);
+            translateHBox.getChildren().add(translateLabel) ;
+            vocaHBox.getChildren().add(vocaLabel) ;
+            gameHBox.getChildren().add(gameLabel);
+            dictHBox.getChildren().add(dictLabel);
         });
 
         appBackground.setOpacity(0.2);
@@ -95,19 +108,12 @@ public class AppController implements Initializable {
 
     private void slideOutMenu() {
         isMenuOn = false;
-        menuLabel.setText(null);
-        translateLabel.setText(null);
-        vocaLabel.setText(null);
-        gameLabel.setText(null);
-        dictLabel.setText(null);
+        menuHBox.getChildren().removeAll(menuLabel);
+        translateHBox.getChildren().removeAll(translateLabel) ;
+        vocaHBox.getChildren().removeAll(vocaLabel) ;
+        gameHBox.getChildren().removeAll(gameLabel);
+        dictHBox.getChildren().removeAll(dictLabel);
         menuSlideOutAnimation.play();
-        menuSlideOutAnimation.setOnFinished(event -> {
-            menuLabel.setText(null);
-            translateLabel.setText(null);
-            vocaLabel.setText(null);
-            gameLabel.setText(null);
-            dictLabel.setText(null);
-        });
 
         appBackground.setOpacity(1);
         
