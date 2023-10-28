@@ -36,9 +36,25 @@
     -fx-border-width: 0 0 3px 0;
 }
 
+.menuButton .label{
+    -fx-font-size: 40px;
+    -fx-text-fill: #7D42F1;
+    -fx-text-alignment: LEFT;
+    -fx-font-family: "Arial";
+    -fx-font-weight: BOLD;
+}
+
 .buttonMenuBar {
     -fx-background-radius: 0;
     -fx-border-radius: 0;
+}
+
+.buttonMenuBar .label{
+    -fx-font-size: 30px;
+    -fx-text-fill: black;
+    -fx-text-alignment: LEFT;
+    -fx-font-family: "Arial";
+    -fx-font-weight: BOLD;
 }
 
 .hoverMenu:hover {
@@ -53,7 +69,7 @@
 }
 
 .buttonMenuBar.active .label {
-    -fx-text-fill: white;
+    -fx-text-fill: white !important;
 }
 
 /* Translator CSS */

@@ -44,11 +44,11 @@
       </AnchorPane>
       <AnchorPane fx:id="appMenu" prefHeight="720.0" prefWidth="110.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="128.0">
+            <VBox fx:id="vBoxButton" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="128.0">
                <children>
-                  <Button fx:id="translateButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToTranslateView" prefHeight="100.0" prefWidth="0.0">
+                  <Button fx:id="translateButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToTranslateView" prefHeight="100.0" prefWidth="0.0" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                        <HBox fx:id="translateHBox" alignment="CENTER_LEFT" spacing="20.0">
                            <children>
                               <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -58,11 +58,6 @@
                                     <Insets left="11.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="translateLabel">
-                                 <font>
-                                    <Font name="Arial Bold" size="30.0" />
-                                 </font>
-                              </Label>
                            </children>
                         </HBox>
                      </graphic>
@@ -77,9 +72,9 @@
                         <Insets />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="vocaButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToVocaView" prefHeight="100.0" prefWidth="0.0">
+                  <Button fx:id="vocaButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToVocaView" prefHeight="100.0" prefWidth="0.0" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                        <HBox fx:id="vocaHBox" alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
                            <children>
                               <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -89,11 +84,6 @@
                                     <Insets left="11.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="vocaLabel" wrapText="true">
-                                 <font>
-                                    <Font name="Arial Bold" size="30.0" />
-                                 </font>
-                              </Label>
                            </children>
                         </HBox>
                      </graphic>
@@ -104,9 +94,9 @@
                         <String fx:value="buttonMenuBar" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="gameButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToGameView" prefHeight="100.0" prefWidth="0.0">
+                  <Button fx:id="gameButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToGameView" prefHeight="100.0" prefWidth="0.0" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                        <HBox fx:id="gameHBox" alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
                            <children>
                               <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -116,14 +106,6 @@
                                     <Insets left="11.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="gameLabel">
-                                 <font>
-                                    <Font name="Arial Bold" size="30.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
                            </children>
                         </HBox>
                      </graphic>
@@ -134,9 +116,9 @@
                         <String fx:value="buttonMenuBar" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="dictButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToDictView" prefHeight="100.0" prefWidth="0.0">
+                  <Button fx:id="dictButton" alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToDictView" prefHeight="100.0" prefWidth="0.0" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                        <HBox fx:id="dictHBox" alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
                            <children>
                               <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -146,11 +128,6 @@
                                     <Insets left="11.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="dictLabel">
-                                 <font>
-                                    <Font name="Arial Bold" size="30.0" />
-                                 </font>
-                              </Label>
                            </children>
                         </HBox>
                      </graphic>
@@ -165,7 +142,7 @@
             </VBox>
             <Button fx:id="menuButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#slideMenu" prefHeight="100.0" prefWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <graphic>
-                  <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="20.0">
+                  <HBox fx:id="menuHBox" alignment="CENTER_LEFT" fillHeight="false" prefHeight="0.0" prefWidth="0.0" spacing="10.0">
                      <children>
                         <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -175,9 +152,9 @@
                               <Insets left="11.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label fx:id="menuLabel" textFill="#7d42f1">
+                        <Label fx:id="menuLabel">
                            <font>
-                              <Font name="Arial Bold" size="40.0" />
+                              <Font name="Arial Bold" size="1.0" />
                            </font>
                         </Label>
                      </children>
