@@ -161,6 +161,8 @@ public class AppController implements Initializable {
             vocaButton.getStyleClass().add("active");
             gameButton.getStyleClass().removeAll("active");
             dictButton.getStyleClass().removeAll("active");
+
+            TranslateController.stopAudio();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -183,6 +185,8 @@ public class AppController implements Initializable {
             vocaButton.getStyleClass().removeAll("active");
             gameButton.getStyleClass().add("active");
             dictButton.getStyleClass().removeAll("active");
+
+            TranslateController.stopAudio();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -206,6 +210,8 @@ public class AppController implements Initializable {
             vocaButton.getStyleClass().removeAll("active");
             gameButton.getStyleClass().removeAll("active");
             dictButton.getStyleClass().add("active");
+
+            TranslateController.stopAudio();
         }
         catch (IOException e) {
             e.printStackTrace();

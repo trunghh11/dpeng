@@ -80,6 +80,7 @@ public class TranslateController implements Initializable {
             translatePlayer.dispose();
         }
     }
+    
     @FXML
     void playInputSound(ActionEvent event) throws Exception {
         if (inputPlayer != null && inputPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
