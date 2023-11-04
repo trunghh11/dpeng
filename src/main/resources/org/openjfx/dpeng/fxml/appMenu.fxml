@@ -2,8 +2,11 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -171,6 +174,59 @@
             <String fx:value="sideBar" />
             <String fx:value="backGround_0_7" />
          </styleClass>
+      </AnchorPane>
+      <AnchorPane fx:id="addWordPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="overlayAddWord" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="250.0" layoutY="107.0" prefHeight="440.0" prefWidth="580.0" styleClass="addWordBox" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="100.0">
+               <children>
+                  <TextField fx:id="keyWordAdd" layoutX="171.0" layoutY="51.0" prefHeight="42.0" promptText="Nhập từ bạn muốn thêm..." styleClass="addWordField" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="45.0">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="typeWordAdd" layoutX="42.0" layoutY="117.0" prefHeight="42.0" promptText="Nhập loại từ..." styleClass="addWordField" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </TextField>
+                  <TextArea fx:id="desWordAdd" layoutX="42.0" layoutY="173.0" prefHeight="230.0" promptText="Nhập mô tả..." wrapText="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                     <styleClass>
+                        <String fx:value="textArea" />
+                        <String fx:value="addWordArea" />
+                     </styleClass>
+                  </TextArea>
+                  <Button fx:id="closeAddWordButton" layoutX="537.0" layoutY="-23.0" mnemonicParsing="false" onAction="#closeAddWordView" prefHeight="61.0" prefWidth="60.0">
+                     <font>
+                        <Font name="Arial Bold" size="24.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/DictImage/closeIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="addWordButton" />
+                        <String fx:value="pressEffect" />
+                     </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Button fx:id="addWordButton" layoutX="458.0" layoutY="586.0" mnemonicParsing="false" onAction="#addWordToDict" prefHeight="55.0" prefWidth="165.0" text="Thêm">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="addWordButton" />
+                  <String fx:value="hoverCursor" />
+                  <String fx:value="pressEffect" />
+               </styleClass>
+            </Button>
+         </children>
       </AnchorPane>
    </children>
 </AnchorPane>

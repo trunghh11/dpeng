@@ -16,6 +16,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -66,6 +68,43 @@ public class AppController implements Initializable {
     @FXML
     private Button dictButton;
 
+    //Handle Add Word View
+    @FXML
+    private Button addWordButton, closeAddWordButton;
+
+    @FXML
+    private AnchorPane addWordPane;
+
+    @FXML
+    private TextField keyWordAdd, typeWordAdd;
+
+    @FXML
+    private TextArea desWordAdd;
+
+    public void showAddWordView() {
+        addWordPane.setDisable(false);
+        addWordPane.setVisible(true);
+        addWordPane.toFront();
+    }
+
+    @FXML
+    void addWordToDict(ActionEvent event) {
+        DictController.addNewWordToDict(keyWordAdd.getText(), typeWordAdd.getText(), desWordAdd.getText());
+        keyWordAdd.setText(null);
+        typeWordAdd.setText(null);
+        desWordAdd.setText(null);
+        
+        closeAddWordView(event);
+    }
+
+    @FXML
+    void closeAddWordView(ActionEvent event) {
+        addWordPane.setDisable(true);
+        addWordPane.setVisible(false);
+        addWordPane.toBack();
+    }
+
+    // Sliding MENU
     @FXML
     void hideMenuWhenCick(MouseEvent event) {
         if (isMenuOn) {
@@ -205,6 +244,11 @@ public class AppController implements Initializable {
 
             appAnchor.getChildren().clear();
             appAnchor.getChildren().add(rootDict);
+            Button showAddWordButton = (Button) rootDict.lookup("#addWordButton");
+
+            showAddWordButton.setOnAction( e -> {
+                showAddWordView();
+            });
 
             translateButton.getStyleClass().removeAll("active");
             vocaButton.getStyleClass().removeAll("active");
@@ -269,6 +313,11 @@ public class AppController implements Initializable {
 
         // Thêm KeyFrame vào Timeline
         menuSlideOutAnimation.getKeyFrames().add(keyFrame2);
+
+        //Hide add word view
+        addWordPane.setDisable(true);
+        addWordPane.setVisible(false);
+        addWordPane.toBack();
 
     }
 

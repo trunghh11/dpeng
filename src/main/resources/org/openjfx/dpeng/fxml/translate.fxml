@@ -15,7 +15,7 @@
          <children>
             <TextArea fx:id="inputArea" layoutX="22.0" layoutY="74.0" onKeyTyped="#whenInputTranslate" prefHeight="400.0" prefWidth="421.0" promptText="Nhập vào đây..." styleClass="textArea" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="75.0">
                <padding>
-                  <Insets top="10.0" />
+                  <Insets bottom="70.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </TextArea>
             <Button fx:id="inputSound" layoutX="48.0" layoutY="526.0" mnemonicParsing="false" onAction="#playInputSound" prefHeight="38.0" prefWidth="54.0">
@@ -64,7 +64,7 @@
          <children>
             <TextArea fx:id="translateArea" editable="false" layoutX="23.0" layoutY="75.0" prefHeight="400.0" prefWidth="421.0" promptText="Bản dịch" styleClass="textArea" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="75.0">
                <padding>
-                  <Insets top="10.0" />
+                  <Insets bottom="70.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </TextArea>
             <Button fx:id="translateSound" layoutX="48.0" layoutY="525.0" mnemonicParsing="false" onAction="#playTranslateSound">
