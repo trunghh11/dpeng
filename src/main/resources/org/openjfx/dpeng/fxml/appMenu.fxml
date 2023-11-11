@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.AppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.AppController">
    <children>
       <AnchorPane fx:id="appBackground" onMouseClicked="#hideMenuWhenCick" styleClass="transparentBg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -177,19 +177,14 @@
       </AnchorPane>
       <AnchorPane fx:id="addWordPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="overlayAddWord" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutX="250.0" layoutY="107.0" prefHeight="440.0" prefWidth="580.0" styleClass="addWordBox" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="100.0">
+            <AnchorPane layoutX="437.0" layoutY="100.0" prefHeight="440.0" prefWidth="580.0" styleClass="addWordBox" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="437.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="100.0">
                <children>
-                  <TextField fx:id="keyWordAdd" layoutX="171.0" layoutY="51.0" prefHeight="42.0" promptText="Nhập từ bạn muốn thêm..." styleClass="addWordField" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="45.0">
+                  <TextField fx:id="keyWordAdd" layoutX="171.0" layoutY="51.0" prefHeight="42.0" promptText="Nhập từ..." styleClass="addWordField" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="45.0">
                      <font>
                         <Font name="Arial" size="16.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="typeWordAdd" layoutX="42.0" layoutY="117.0" prefHeight="42.0" promptText="Nhập loại từ..." styleClass="addWordField" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
-                     <font>
-                        <Font name="Arial" size="16.0" />
-                     </font>
-                  </TextField>
-                  <TextArea fx:id="desWordAdd" layoutX="42.0" layoutY="173.0" prefHeight="230.0" promptText="Nhập mô tả..." wrapText="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                  <TextArea fx:id="desWordAdd" layoutX="42.0" layoutY="173.0" prefHeight="265.0" prefWidth="508.0" promptText="Nhập mô tả..." wrapText="true" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="130.0">
                      <styleClass>
                         <String fx:value="textArea" />
                         <String fx:value="addWordArea" />
@@ -214,9 +209,19 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Label layoutX="78.0" layoutY="25.0" text="Từ" AnchorPane.leftAnchor="44.0">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="50.0" layoutY="109.0" text="Mô tả">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-            <Button fx:id="addWordButton" layoutX="458.0" layoutY="586.0" mnemonicParsing="false" onAction="#addWordToDict" prefHeight="55.0" prefWidth="165.0" text="Thêm">
+            <Button fx:id="addAndEditButton" layoutX="645.0" layoutY="583.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="165.0" text="OK">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
@@ -226,6 +231,21 @@
                   <String fx:value="pressEffect" />
                </styleClass>
             </Button>
+            <AnchorPane layoutX="69.0" layoutY="100.0" prefHeight="440.0" prefWidth="348.0" styleClass="addWordBox">
+               <children>
+                  <TextArea editable="false" layoutX="32.0" layoutY="95.0" prefHeight="325.0" prefWidth="300.0" promptText="Eg: Phát âm: /gru:p/Loại: Danh từNghĩa: NhómVí dụ: To lean in groups. Dịch: Học nhóm" text="*Lưu ý: &#10;    - Phần mô tả không bắt buộc &#10;    - Có thể thêm nhiều cho các mục: Phát âm, Loại, Nghĩa, Ví dụ.&#10;    - Phần Dịch của ví dụ không bắt buộc&#10;________________________&#10;Phát âm: /gru:p/&#10;Loại: Danh từ&#10;Nghĩa: Nhóm&#10;Ví dụ: To lean in groups. Dịch: Học nhóm&#10;&#10;" wrapText="true" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+                     <styleClass>
+                        <String fx:value="textArea" />
+                        <String fx:value="addWordArea" />
+                     </styleClass>
+                  </TextArea>
+                  <Label layoutX="46.0" layoutY="36.0" text="Ví dụ mô tả:">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

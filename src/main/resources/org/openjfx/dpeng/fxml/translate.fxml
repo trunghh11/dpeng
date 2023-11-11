@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="940.0" styleClass="transparentBg" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.TranslateController">
+<AnchorPane prefHeight="600.0" prefWidth="940.0" styleClass="transparentBg" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.TranslateController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefWidth="445.0" styleClass="textAreaWrap" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

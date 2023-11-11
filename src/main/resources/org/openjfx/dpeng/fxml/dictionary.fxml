@@ -14,14 +14,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.DictController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.DictController">
    <children>
       <AnchorPane prefHeight="55.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField layoutX="14.0" layoutY="15.0" promptText="Nhập từ cần tra..." styleClass="searchBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextField fx:id="searchWordField" layoutX="14.0" layoutY="15.0" promptText="Nhập từ cần tra..." styleClass="searchBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font name="Arial Italic" size="18.0" />
                </font>
@@ -36,7 +35,7 @@
                         <String fx:value="pressEffect" />
                      </styleClass>
                   </ChoiceBox>
-                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#showNotFoundWordView" prefWidth="80.0">
+                  <Button fx:id="searchButton" mnemonicParsing="false" prefWidth="80.0">
                      <graphic>
                         <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -58,159 +57,14 @@
          <children>
             <AnchorPane layoutX="42.0" layoutY="131.0" prefHeight="517.0" prefWidth="240.0" styleClass="textAreaWrap" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label text="Gần đây" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="8.0">
+                  <Label fx:id="suggestAndHistoryLabel" text="Gần đây" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="8.0">
                      <font>
                         <Font name="Arial" size="28.0" />
                      </font>
                   </Label>
                   <ScrollPane layoutX="10.0" layoutY="28.0" prefHeight="425.0" prefWidth="226.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="46.0">
                      <content>
-                        <VBox prefHeight="606.0" prefWidth="206.0" spacing="14.0">
-                           <children>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Happy">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                              <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="35.0" prefWidth="155.0" text="Dog : Chó">
-                                 <font>
-                                    <Font name="Arial" size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="18.0" />
-                                 </padding>
-                                 <styleClass>
-                                    <String fx:value="historyWordButton" />
-                                    <String fx:value="hoverCursor" />
-                                    <String fx:value="pressEffect" />
-                                 </styleClass>
-                              </Button>
-                           </children>
+                        <VBox fx:id="suggestAndHistoryBox" prefWidth="206.0" spacing="14.0">
                            <padding>
                               <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                            </padding>
@@ -265,47 +119,61 @@
                   </AnchorPane>
                   <AnchorPane layoutX="77.0" layoutY="86.0" styleClass="addWordPane" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <children>
-                        <HTMLEditor fx:id="resultWordEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="455.0" prefWidth="626.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="10.0" />
                         <WebView fx:id="resultWordView" prefHeight="438.0" prefWidth="610.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="10.0" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="576.0" layoutY="128.0" mnemonicParsing="false" onAction="#confirmToDeleteWord" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/DictImage/deleteIcon.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D width="40.0" />
+                                 </viewport>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="delete_editButton" />
+                              <String fx:value="hoverCursor" />
+                              <String fx:value="pressEffect" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="editWordButton" alignment="CENTER" contentDisplay="CENTER" layoutX="577.0" layoutY="69.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/DictImage/editIcon.png" />
+                                 </image>
+                                 <viewport>
+                                    <Rectangle2D width="40.0" />
+                                 </viewport>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="2.0" />
+                           </padding>
+                           <styleClass>
+                              <String fx:value="delete_editButton" />
+                              <String fx:value="hoverCursor" />
+                              <String fx:value="pressEffect" />
+                           </styleClass>
+                        </Button>
+                        <Button layoutX="576.0" layoutY="10.0" mnemonicParsing="false" onAction="#playWordSound" prefHeight="50.0" prefWidth="50.0">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/DictImage/speakerIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="transparentBg" />
+                              <String fx:value="hoverCursor" />
+                              <String fx:value="pressEffect" />
+                              <String fx:value="delete_editButton" />
+                           </styleClass>
+                        </Button>
                      </children>
                   </AnchorPane>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="36.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/DictImage/editIcon.png" />
-                           </image>
-                           <viewport>
-                              <Rectangle2D width="40.0" />
-                           </viewport>
-                        </ImageView>
-                     </graphic>
-                     <padding>
-                        <Insets left="2.0" />
-                     </padding>
-                     <styleClass>
-                        <String fx:value="delete_editButton" />
-                        <String fx:value="hoverCursor" />
-                        <String fx:value="pressEffect" />
-                     </styleClass>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="595.0" layoutY="94.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/DictImage/deleteIcon.png" />
-                           </image>
-                           <viewport>
-                              <Rectangle2D width="40.0" />
-                           </viewport>
-                        </ImageView>
-                     </graphic>
-                     <styleClass>
-                        <String fx:value="delete_editButton" />
-                        <String fx:value="hoverCursor" />
-                        <String fx:value="pressEffect" />
-                     </styleClass>
-                  </Button>
                </children>
             </AnchorPane>
          </children>

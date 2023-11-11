@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("fxml/appMenu.fxml"));
+        FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/appMenu.fxml"));
         Parent rootMenu = menuLoader.load();
 
         scene = new Scene(rootMenu);

@@ -1,4 +1,4 @@
-package org.openjfx.dpeng;
+package org.openjfx.dpeng.controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -70,28 +70,35 @@ public class AppController implements Initializable {
 
     //Handle Add Word View
     @FXML
-    private Button addWordButton, closeAddWordButton;
+    private Button addAndEditButton, closeAddWordButton;
 
     @FXML
     private AnchorPane addWordPane;
 
     @FXML
-    private TextField keyWordAdd, typeWordAdd;
+    private TextField keyWordAdd;
 
     @FXML
     private TextArea desWordAdd;
 
-    public void showAddWordView() {
+    public void showAddAndEditWordView(String kWord, String dWord) {
+        if (kWord.isEmpty()) {
+            keyWordAdd.setDisable(false);
+        } else {
+            keyWordAdd.setDisable(true);
+        }
+
+        keyWordAdd.setText(kWord);
+        desWordAdd.setText(dWord);
+
         addWordPane.setDisable(false);
         addWordPane.setVisible(true);
         addWordPane.toFront();
     }
 
-    @FXML
-    void addWordToDict(ActionEvent event) {
-        DictController.addNewWordToDict(keyWordAdd.getText(), typeWordAdd.getText(), desWordAdd.getText());
+    public void confirmAddAndEditWord(ActionEvent event) {
+        DictController.addOrEditWord(keyWordAdd.getText(), desWordAdd.getText());
         keyWordAdd.setText(null);
-        typeWordAdd.setText(null);
         desWordAdd.setText(null);
         
         closeAddWordView(event);
@@ -168,7 +175,7 @@ public class AppController implements Initializable {
             if (isMenuOn) {
                 slideOutMenu();
             }
-            FXMLLoader translateLoader = new FXMLLoader(getClass().getResource("fxml/translate.fxml"));
+            FXMLLoader translateLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/translate.fxml"));
             AnchorPane rootTranslate = translateLoader.load();
 
             appAnchor.getChildren().clear();
@@ -190,7 +197,7 @@ public class AppController implements Initializable {
             if (isMenuOn) {
                 slideOutMenu();
             }
-            FXMLLoader vocaLoader = new FXMLLoader(getClass().getResource("fxml/vocabulary.fxml"));
+            FXMLLoader vocaLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/vocabulary.fxml"));
             AnchorPane rootVoca = vocaLoader.load();
 
             appAnchor.getChildren().clear();
@@ -214,7 +221,7 @@ public class AppController implements Initializable {
             if (isMenuOn) {
                 slideOutMenu();
             }
-            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("fxml/game.fxml"));
+            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/game.fxml"));
             AnchorPane rootGame = gameLoader.load();
 
             appAnchor.getChildren().clear();
@@ -239,15 +246,39 @@ public class AppController implements Initializable {
             if (isMenuOn) {
                 slideOutMenu();
             }
-            FXMLLoader dictLoader = new FXMLLoader(getClass().getResource("fxml/dictionary.fxml"));
+            FXMLLoader dictLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/dictionary.fxml"));
             AnchorPane rootDict = dictLoader.load();
 
             appAnchor.getChildren().clear();
             appAnchor.getChildren().add(rootDict);
             Button showAddWordButton = (Button) rootDict.lookup("#addWordButton");
+            Button showEditWordButton = (Button) rootDict.lookup("#editWordButton");
 
             showAddWordButton.setOnAction( e -> {
-                showAddWordView();
+                showAddAndEditWordView("", "");
+            });
+
+            showEditWordButton.setOnAction( e -> {
+                if (DictController.currWordResult == null) {
+                    return;
+                }
+                String text = DictController.currWordResult.getTextDescription();
+                String[] texts = text.split(System.lineSeparator(), 2);
+
+                String kWord = "", dWord = "";
+                kWord = texts[0].substring(4);
+                if (texts.length == 2) {
+                    dWord = texts[1];
+                } 
+                
+                showAddAndEditWordView(kWord, dWord);
+            });
+
+            addAndEditButton.setOnAction(e -> {
+                confirmAddAndEditWord(event);
+
+                DictController controller = dictLoader.getController();
+                controller.updateResultView();
             });
 
             translateButton.getStyleClass().removeAll("active");
@@ -266,7 +297,7 @@ public class AppController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            FXMLLoader translateLoader = new FXMLLoader(getClass().getResource("fxml/translate.fxml"));
+            FXMLLoader translateLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/translate.fxml"));
             AnchorPane rootTranslate = translateLoader.load();
 
             appAnchor.getChildren().add(rootTranslate);
