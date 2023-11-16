@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.DictController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="transparentBg" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.DictController">
    <children>
       <AnchorPane prefHeight="55.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -35,7 +35,7 @@
                         <String fx:value="pressEffect" />
                      </styleClass>
                   </ChoiceBox>
-                  <Button fx:id="searchButton" mnemonicParsing="false" prefWidth="80.0">
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchExactWord" prefWidth="80.0">
                      <graphic>
                         <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -53,7 +53,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="42.0" layoutY="158.0" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundGradient" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="83.0">
+      <AnchorPane layoutX="42.0" layoutY="158.0" prefHeight="200.0" prefWidth="200.0" styleClass="transparentBg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="83.0">
          <children>
             <AnchorPane layoutX="42.0" layoutY="131.0" prefHeight="517.0" prefWidth="240.0" styleClass="textAreaWrap" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>

@@ -1,15 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="backGround_0_9" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="topicsGameWrapper" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.GameController">
    <children>
-      <Label layoutX="306.0" layoutY="279.0" text="THIS IS GAMEVIEW !!!!">
+      <Label layoutX="515.5" layoutY="16.0" text="topic" AnchorPane.rightAnchor="340.5">
          <font>
-            <Font size="34.0" />
+            <Font name="System Bold" size="40.0" />
          </font>
       </Label>
+      <Label layoutX="344.0" layoutY="15.0" text="Choose a">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Button fx:id="playGameButton" layoutX="400.0" layoutY="534.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" stylesheets="@../css/styles.css" text="Chơi" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+         <styleClass>
+            <String fx:value="playGameButton" />
+            <String fx:value="pressEffect" />
+            <String fx:value="hoverCursor" />
+         </styleClass>
+      </Button>
+      <AnchorPane layoutX="37.0" layoutY="78.0" prefHeight="120.0" prefWidth="232.0" stylesheets="@../css/styles.css" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <ImageView fitHeight="119.0" fitWidth="112.0" layoutX="33.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/animalTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="144.0" layoutY="-1.0" prefHeight="134.0" prefWidth="129.0" text="Animal" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+         <styleClass>
+            <String fx:value="topicGameContainer" />
+            <String fx:value="active" />
+         </styleClass>
+      </AnchorPane>
+      <AnchorPane layoutX="346.0" layoutY="83.0" prefHeight="120.0" prefWidth="232.0" styleClass="topicGameContainer" stylesheets="@../css/styles.css" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <ImageView fitHeight="128.0" fitWidth="120.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/homeTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="165.0" layoutY="-1.0" prefHeight="134.0" prefWidth="90.0" text="Home &amp; Garden" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="356.0" layoutY="93.0" prefHeight="120.0" prefWidth="232.0" styleClass="topicGameContainer" stylesheets="@../css/styles.css" AnchorPane.leftAnchor="335.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <ImageView fitHeight="118.0" fitWidth="109.0" layoutX="30.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/healthTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="133.0" layoutY="-1.0" prefHeight="134.0" prefWidth="140.0" text="Health" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="86.0" layoutY="325.0" prefHeight="120.0" prefWidth="232.0" styleClass="topicGameContainer" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="35.0">
+         <children>
+            <ImageView fitHeight="123.0" fitWidth="110.0" layoutX="36.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/shapeTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="170.0" layoutY="-1.0" prefHeight="134.0" prefWidth="103.0" text="Color &amp; Shape" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="421.0" layoutY="358.0" prefHeight="120.0" prefWidth="232.0" styleClass="topicGameContainer" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="335.0">
+         <children>
+            <ImageView fitHeight="122.0" fitWidth="112.0" layoutX="31.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/FaDTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="170.0" layoutY="-1.0" prefHeight="134.0" prefWidth="103.0" text="Food &amp; Drinks" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="619.0" layoutY="353.0" prefHeight="120.0" prefWidth="232.0" styleClass="topicGameContainer" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="85.0" AnchorPane.rightAnchor="35.0">
+         <children>
+            <ImageView fitHeight="119.0" fitWidth="115.0" layoutX="33.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/hobbyTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="144.0" layoutY="-1.0" prefHeight="134.0" prefWidth="129.0" text="Hobby" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="96.0" layoutY="335.0" prefHeight="120.0" prefWidth="232.0" styleClass="topicGameContainer" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="235.0" AnchorPane.leftAnchor="35.0">
+         <children>
+            <ImageView fitHeight="114.0" fitWidth="114.0" layoutX="32.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/artTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="144.0" layoutY="-1.0" prefHeight="134.0" prefWidth="129.0" text="Art &amp; Craft" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="431.0" layoutY="368.0" prefHeight="120.0" prefWidth="232.0" styleClass="topicGameContainer" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="235.0" AnchorPane.leftAnchor="335.0">
+         <children>
+            <ImageView fitHeight="122.0" fitWidth="119.0" layoutX="27.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/appearanceTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="144.0" layoutY="-1.0" prefHeight="134.0" prefWidth="129.0" text="Appearance" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="629.0" layoutY="363.0" prefHeight="120.0" prefWidth="232.0" styleClass="topicGameContainer" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="235.0" AnchorPane.rightAnchor="35.0">
+         <children>
+            <ImageView fitHeight="117.0" fitWidth="112.0" layoutX="30.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/scienceTopic.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="144.0" layoutY="-1.0" prefHeight="134.0" prefWidth="129.0" text="Science" wrapText="true">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

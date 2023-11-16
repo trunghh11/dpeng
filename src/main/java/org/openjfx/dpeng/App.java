@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import org.openjfx.dpeng.database.model.TopicDict;
 /**
  * JavaFX App.
  */
@@ -25,15 +27,9 @@ public class App extends Application {
 
         Image logo = new Image(getClass().getResourceAsStream("images/AppImage/logo.png"));
         stage.getIcons().add(logo);
-
         stage.setTitle("DPeng demoooooooooooooooo");
-
-        // rootMenu.setOnMouseClicked(event -> {
-        //     Node clickedNode = (Node) event.getTarget();
-        //     System.out.println("Đã click vào phần tử: " + clickedNode);
-        //     // Thực hiện hành động khác tại đây (nếu cần)
-        // });
-
+        
+        TopicDict.loadAllDict();
         stage.resizableProperty().set(false);
         stage.show();
     }

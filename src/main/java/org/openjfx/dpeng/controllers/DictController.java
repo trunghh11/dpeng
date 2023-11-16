@@ -234,6 +234,11 @@ public class DictController implements Initializable {
     private WebView resultWordView;
 
     public void updateResultView() {
+        if (currWordResult == null) {
+            resultWordView.getEngine().loadContent("");
+            return;
+        }
+
         String fullResult= resultHTMLTemplate.replace("<body>", "<body>" + currWordResult.getHtmlDescription());
         resultWordView.getEngine().loadContent(fullResult);
     }
@@ -247,6 +252,22 @@ public class DictController implements Initializable {
      * Display RESULT
      * @param event
      */
+
+    @FXML
+    void searchExactWord(ActionEvent event) {
+        String exactKWord = searchWordField.getText();
+
+        Word exactWord = DictionaryDAO.getInstance().selectByKeyWord(exactKWord);
+
+        if (exactWord != null) {
+            currWordResult = exactWord;
+            updateResultView();
+            addWordToHistory(exactKWord);
+        } else {
+            showNotFoundWordView();
+        }
+    }
+
 
     public void showNotFoundWordView() {
         addWordPane.setVisible(true);
@@ -291,9 +312,9 @@ public class DictController implements Initializable {
     }
 
     public void showWordHistory() {
+        hideNotFoundWordView();
         suggestAndHistoryLabel.setText("Gần đây");
         suggestAndHistoryBox.getChildren().clear();
-
         for (String word : historySearch) {
             Button historyButton = new Button(capFirstLetter(word)); 
             historyButton.getStyleClass().addAll("historyWordButton", "hoverCursor", "pressEffect");
@@ -343,7 +364,7 @@ public class DictController implements Initializable {
         if (currWordResult == null) {
             return;
         }
-        
+
         if (keyWordPlayer != null && keyWordPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             keyWordPlayer.stop();
             keyWordPlayer.dispose();

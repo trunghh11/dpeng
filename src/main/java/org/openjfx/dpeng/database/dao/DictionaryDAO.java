@@ -19,10 +19,8 @@ public class DictionaryDAO implements DAOInterface<Word> {
     public int insert(Word word) {
         int result = 0;
         try {
-            // B1
             Connection connection = JDBCUtil.getConnection();
 
-            // B2
             String SQL = "REPLACE INTO dictionary (word, textDescription, htmlDescription) "
                     + " VALUES (?, ?, ?)" ;
             PreparedStatement pStatement = connection.prepareStatement(SQL);
@@ -31,14 +29,11 @@ public class DictionaryDAO implements DAOInterface<Word> {
             pStatement.setString(2, word.getTextDescription());
             pStatement.setString(3, word.getHtmlDescription());
 
-            // B3
             result = pStatement.executeUpdate();
 
-            // B4
             System.out.println("Bạn đã thực thi: " + SQL);
             System.out.println("Có " + result + " dòng bị thay đổi!");
 
-            // B5
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,10 +46,8 @@ public class DictionaryDAO implements DAOInterface<Word> {
     public int update(Word word) {
         int result = 0;
         try {
-            // B1
             Connection connection = JDBCUtil.getConnection();
 
-            // B2
             String SQL = "UPDATE dictionary " +
                     " SET " +
                     " textDescription = ? " +
@@ -66,14 +59,11 @@ public class DictionaryDAO implements DAOInterface<Word> {
             pStatement.setString(2, word.getHtmlDescription());
             pStatement.setString(4, word.getKey());
 
-            // B3
             result = pStatement.executeUpdate();
 
-            // B4
             System.out.println("Bạn đã thực thi: " + SQL);
             System.out.println("Có " + result + " dòng bị thay đổi!");
 
-            // B5
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,23 +76,18 @@ public class DictionaryDAO implements DAOInterface<Word> {
     public int delete(Word word) {
         int result = 0;
         try {
-            // B1
             Connection connection = JDBCUtil.getConnection();
 
-            // B2
             String SQL = "DELETE FROM dictionary " +
                     " WHERE word = ? ";
             PreparedStatement pStatement = connection.prepareStatement(SQL);
             pStatement.setString(1, word.getKey());
             
-            // B3
             result = pStatement.executeUpdate();
 
-            // B4
             System.out.println("Bạn đã thực thi: " + SQL);
             System.out.println("Có " + result + " dòng bị thay đổi!");
 
-            // B5
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,16 +119,13 @@ public class DictionaryDAO implements DAOInterface<Word> {
         kword += "%";
         int count = 0;
         try {
-            // B1
             Connection connection = JDBCUtil.getConnection();
 
-            // B2
             String SQL = "SELECT word FROM dictionary " +
                     " WHERE word LIKE ? ";
             PreparedStatement pStatement = connection.prepareStatement(SQL);
             pStatement.setString(1, kword);
             
-            // B3
             ResultSet suggestionWords = pStatement.executeQuery();
             if (suggestionWords != null) {
                 while (suggestionWords.next() && count < 70) {
@@ -153,10 +135,7 @@ public class DictionaryDAO implements DAOInterface<Word> {
                     count ++;
                 }
             }
-            // B4
 
-
-            // B5
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -168,16 +147,13 @@ public class DictionaryDAO implements DAOInterface<Word> {
     public Word selectByKeyWord(String kword) {
         Word word = null;
         try {
-            // B1
             Connection connection = JDBCUtil.getConnection();
 
-            // B2
             String SQL = "SELECT * FROM dictionary " +
                     " WHERE word = ? ";
             PreparedStatement pStatement = connection.prepareStatement(SQL);
             pStatement.setString(1, kword);
             
-            // B3
             ResultSet suggestionWords = pStatement.executeQuery();
             if (suggestionWords != null) {
                 while(suggestionWords.next()) {
@@ -189,9 +165,7 @@ public class DictionaryDAO implements DAOInterface<Word> {
                     break;
                 }
             }
-            // B4
 
-            // B5
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
