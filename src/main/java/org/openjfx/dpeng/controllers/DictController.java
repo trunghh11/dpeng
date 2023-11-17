@@ -239,7 +239,7 @@ public class DictController implements Initializable {
             return;
         }
 
-        String fullResult= resultHTMLTemplate.replace("<body>", "<body>" + currWordResult.getHtmlDescription());
+        String fullResult = resultHTMLTemplate.replace("<body>", "<body>" + currWordResult.getHtmlDescription());
         resultWordView.getEngine().loadContent(fullResult);
     }
 

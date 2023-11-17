@@ -135,7 +135,7 @@
                               <Image url="@../images/VocabularyImage/topic4.png" />
                            </image>
                         </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="116.0" text="Art &amp; Carft" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="116.0" text="Art &amp; Craft" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>

@@ -99,7 +99,7 @@ public class FlashCardController implements Initializable {
             case "Home & Garden":
                 currDict = TopicDict.homeDict;
                 break;
-            case "Art & Carft":
+            case "Art & Craft":
                 currDict = TopicDict.artDict;
                 break;
             case "Appearance":

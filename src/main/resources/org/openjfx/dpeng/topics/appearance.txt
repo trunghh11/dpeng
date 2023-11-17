@@ -53,7 +53,6 @@ Ears = Tai
 Forehead = Trán
 Neck = Cổ
 Shoulders = Vai
-Chest = Ngực
 Arms = Cánh tay
 Elbows = Khuỷu tay
 Wrists = Cổ tay

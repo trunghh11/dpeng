@@ -12,6 +12,23 @@
     -fx-opacity: 1;
 }
 
+/* All Progress bar CSS */
+.progress-bar .bar {
+    -fx-background-color: #d3fb82;
+    -fx-background-radius: 2.2em;
+    -fx-border-color: #89a377;
+    -fx-border-width: 0.2em;
+    -fx-border-radius: 2.2em;
+    -fx-background-insets: -0.03em;
+}
+
+.progress-bar .track {
+    -fx-background-color: white;
+    -fx-background-radius: 2.2em;
+    -fx-border-color: #89a377;
+    -fx-border-radius: 2.2em;
+    -fx-border-width: 0.2em;
+}
 /* All Scroll Pane CSS */
 .scroll-pane {
     -fx-background-color: transparent;
@@ -651,4 +668,146 @@
     -fx-border-radius: 34px;
     -fx-border-width: 4px;
     -fx-border-color: #89a377;
+}
+
+.scoreLabel {
+    -fx-background-color: white;
+    -fx-border-color: #89a377;
+    -fx-border-width: 0 0 0 4;
+    -fx-border-radius: 10;
+    -fx-background-radius: 0 12 12 0;
+    /* -fx-background-insets: 1px; */
+    -fx-border-insets: -4px;
+}
+
+.hintPane {
+    -fx-background-color: white;
+    -fx-border-color: #89a377;
+    -fx-border-radius: 30;
+    -fx-border-width: 4px;
+    -fx-background-radius: 30;
+    -fx-background-insets: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 3, 3);
+
+}
+
+.letterUnfillBox {
+    -fx-background-color: #d0d0d080;
+    -fx-pref-height: 60;
+    -fx-pref-width: 60;
+    -fx-border-width: 2;
+    /* -fx-border-style: dashed; */
+    -fx-border-color: #89a377;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-background-insets: 1;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.6), 12, 0, 12, 12);
+}
+
+.letterUnfillBox:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 0.7;
+}
+
+.letterUnfillBox:pressed {
+    -fx-effect: dropshadow( gaussian , #7D42F110 , 4,0,0,1 ); 
+    -fx-opacity: 1;
+}
+
+.letterOfWordBox {
+    -fx-pref-height: 60;
+    -fx-pref-width: 60;
+    -fx-background-color: #ffffff;
+    -fx-border-width: 2;
+    -fx-border-color: #89a377;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-background-insets: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 3, 3);
+}
+
+.letterOfWordBox:hover {
+    -fx-cursor: hand;
+    -fx-opacity: 0.85;
+}
+
+.letterOfWordBox:pressed {
+    -fx-effect: dropshadow( gaussian , #7D42F110 , 4,0,0,1 ); 
+    -fx-opacity: 1;
+}
+
+.letterUnfillBox .label,
+.letterOfWordBox .label {
+    -fx-pref-width: 56;
+    -fx-pref-height: 56;
+    -fx-translate-x: 2;
+    -fx-translate-y: 0;
+    -fx-font-size: 32;
+    -fx-font-family: "Arial";
+    -fx-text-alignment: CENTER;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+.letterUnfillBox.filled {
+    -fx-background-color: #ffffff;
+    -fx-border-width: 2;
+    -fx-border-color: #89a377;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-background-insets: 1;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, 12, 12);
+}
+
+.letterUnfillBox.filled.correct {
+    -fx-background-color: #DAF1AB;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 3, 3);
+}
+
+.letterUnfillBox.incorrect {
+    -fx-background-color: #FAC5C5 !important;
+    -fx-border-color: #FA3E3E !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 3, 3);
+
+}
+
+.messageCorrectLabel {
+    -fx-padding: 10 40 10 40;
+    -fx-background-color: #DAF1AB;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+    -fx-background-radius: 28;
+    -fx-font-family: "Arial";
+    -fx-font-size: 22;
+    -fx-font-style: italic;
+}
+
+.messageWrongLabel {
+    -fx-padding: 10 40 10 40;
+    -fx-background-color: #fac5c5;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+    -fx-background-radius: 28;
+    -fx-font-family: "Arial";
+    -fx-font-size: 22;
+    -fx-font-style: italic;
+}
+
+/* ----------SCORE CSS STYLE--------- */
+.scoreProgressBar .bar {
+    -fx-background-color: #d3fb82;
+    -fx-background-radius: 35;
+    -fx-border-color: #89a377;
+    -fx-border-width: 6px;
+    -fx-border-radius: 35;
+    
+}
+
+.scoreProgressBar .track {
+    -fx-background-color: white;
+    -fx-background-radius: 35;
+    -fx-border-color: #89a377;
+    -fx-border-radius: 35;
+    -fx-border-width: 6px;
 }
