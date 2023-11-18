@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import org.openjfx.dpeng.database.model.SoundHelper;
 import org.openjfx.dpeng.database.model.TopicDict;
 /**
  * JavaFX App.
@@ -30,6 +31,7 @@ public class App extends Application {
         stage.setTitle("DPeng demoooooooooooooooo");
         
         TopicDict.loadAllDict();
+        SoundHelper.loadAllSound();
         stage.resizableProperty().set(false);
         stage.show();
     }

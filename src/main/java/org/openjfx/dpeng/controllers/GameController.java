@@ -101,6 +101,7 @@ public class GameController implements Initializable {
             AnchorPane playPane = playLoader.load();
             playGamePane.getChildren().add(playPane); // nhét AnchorPane lấy được từ load vào play game pane
             playGameController = playLoader.getController(); // lấy ra controller của play game rồi đưa ra ngoài biến global #playGameController để dùng tới đoạn bên trên
+            playGameController.setGameController(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,10 +112,10 @@ public class GameController implements Initializable {
             playGamePane.setDisable(true); // cook nó về dưới đáy xã hội
             gamePane.setDisable(false); // Enable mấy cái topic lên để còn bấm được
 
-            Button backToGameHomeButton = (Button) playGamePane.lookup("#backToGameHomeButton"); // tìm kiếm cái nút "trở lại" ở trong play game pane ý
-            backToGameHomeButton.setOnAction(event -> {
-                backToGameHome(); // khi bấm vào cái nút này thì cho nó gọi hàm #backToGameHome
-            });
+            // Button backToGameHomeButton = (Button) playGamePane.lookup("#backToGameHomeButton"); // tìm kiếm cái nút "trở lại" ở trong play game pane ý
+            // backToGameHomeButton.setOnAction(event -> {
+            //     backToGameHome(); // khi bấm vào cái nút này thì cho nó gọi hàm #backToGameHome
+            // });
         }
 
 

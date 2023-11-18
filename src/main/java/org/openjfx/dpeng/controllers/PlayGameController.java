@@ -1,5 +1,6 @@
 package org.openjfx.dpeng.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import org.openjfx.dpeng.database.model.SoundHelper;
 import org.openjfx.dpeng.database.model.TopicDict;
 
 import javafx.animation.FadeTransition;
@@ -15,7 +17,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -24,9 +28,13 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class PlayGameController implements Initializable {
+    GameController gameController;
+    MediaPlayer inGameSound;
+    
     Map<String, String> currDictGame = new HashMap<String, String>(); // lưu các từ của topic hiện tại ( theo kiểu từ - nghĩa ý )
     ArrayList<String> answerList = new ArrayList<>(); // lưu các câu trả lời nè
     ArrayList<String> questionList = new ArrayList<>(); // lưu các câu hỏi theo từng câu trả lời nè (vì câu trả lời là key nên khi random chỉ cần random câu trả lời)
@@ -45,23 +53,49 @@ public class PlayGameController implements Initializable {
     int totalQuestion; // lưu tổng câu hỏi hiện tại nè
     int countFilledLetters = 0;
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    public void exitGame() {
+        gameController.backToGameHome();
+        SoundHelper.stopSound(inGameSound);
+    }
+
+    public void closeSetting() {
+        settingPlayPane.setVisible(false);
+        settingPlayPane.toBack();
+        settingPlayPane.setDisable(true);
+
+        SoundHelper.playSound(inGameSound);
+    }
+
+    @FXML
+    void openSetting(ActionEvent event) {
+        settingPlayPane.setVisible(true);
+        settingPlayPane.toFront();
+        settingPlayPane.setDisable(false);
+
+        // SoundHelper.pauseSound(inGameSound);
+    }
+
+    @FXML
+    private AnchorPane settingPlayPane;
+
+    @FXML
+    private Button settingGameButton;
+
     @FXML
     private Button backToGameHomeButton; // cái nút "trở lại" ý
     
     @FXML
-    private ImageView heart1; // Trái tim đầu tiên <3
-
-    @FXML
-    private ImageView heart2; // Trái tim thứ 2 đồ <3
-    
-    @FXML
-    private ImageView heart3; // Trái tim cuối cùng TˆT
-    
-    @FXML
-    private Button musicButton; // Nút âm nhạc, yayy
+    private ImageView heart1, heart2, heart3; // Trái tims
 
     @FXML
     private Button helpButton; // Nút cấp cứu, ựa
+    
+    @FXML
+    private AnchorPane helpPane;
     
     @FXML
     private Label progressWordLabel; // Cái này là chỉ câu hỏi hiện tại là câu số mấy
@@ -83,6 +117,20 @@ public class PlayGameController implements Initializable {
 
     @FXML
     private ProgressBar timeProgress; // Cái này để chạy thời gian
+
+    @FXML
+    void showHelpPane(ActionEvent event) {
+        helpPane.setVisible(true);
+        helpPane.toFront();
+        helpPane.setDisable(false);
+    }
+
+    @FXML
+    void closeHelp(ActionEvent event) {
+        helpPane.setVisible(false);
+        helpPane.toBack();
+        helpPane.setDisable(true);
+    }
 
     // Hàm này cập nhật lại câu hỏi, gọi khi next câu hỏi (khi mới hiện play game, trả lời sai, trả lời đúng)
     public void updateQuestion() {
@@ -200,6 +248,12 @@ public class PlayGameController implements Initializable {
         }
     }
 
+    public void nextQuestion() {
+        countFilledLetters = 0;
+        currQuestionGameIndex ++;
+        updateQuestion();
+    }
+
     public void handleCorrectAnswer() {
         
         for (Node letter : fillLetterFlowPane.getChildren()) {
@@ -227,7 +281,7 @@ public class PlayGameController implements Initializable {
         messageCorrect.getStyleClass().add("messageCorrectLabel");
         timeProgress.setVisible(false);
         messageFlowPane.getChildren().add(messageCorrect);
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2));
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2.2));
 
         fadeTransition.setFromValue(1.0); // Giá trị hiển thị ban đầu
         fadeTransition.setToValue(0.0); // Giá trị ẩn đi
@@ -240,6 +294,7 @@ public class PlayGameController implements Initializable {
         fadeTransition.play();
         fadeTransition.setOnFinished(e -> {
             messageFlowPane.getChildren().clear();
+            nextQuestion();
             timeProgress.setVisible(true);
         });
 
@@ -274,7 +329,7 @@ public class PlayGameController implements Initializable {
         messageWrong.getStyleClass().add("messageWrongLabel");
         timeProgress.setVisible(false);
         messageFlowPane.getChildren().add(messageWrong);
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2));
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2.2));
 
         fadeTransition.setFromValue(1.0); // Giá trị hiển thị ban đầu
         fadeTransition.setToValue(0.0); // Giá trị ẩn đi
@@ -287,11 +342,11 @@ public class PlayGameController implements Initializable {
         fadeTransition.play();
         fadeTransition.setOnFinished(e -> {
             messageFlowPane.getChildren().clear();
+            nextQuestion();
             timeProgress.setVisible(true);
         });
         
     }
-
 
     public String getAnswerString() {
         if (countFilledLetters == 0) {
@@ -363,16 +418,43 @@ public class PlayGameController implements Initializable {
             answerList.add(word);
             questionList.add(currDictGame.get(word));
         }
-        
+
         totalQuestion = questionList.size(); // lấy tổng câu hỏi ra, bao nhiêu câu hỏi thì sau này tính sau
         updateQuestion(); // thực hiện gọi hàm update question
-
+        SoundHelper.playSound(inGameSound);
     }
 
     // Do lúc mới khởi tạo thì nó cũng bị ẩn đi nên hàm init cũng chưa nói lên được nhiều điều
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        try { // load luôn play game khi load game, đặt nó về sau để đỡ phải load sau này
+            FXMLLoader settingLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/settingPlayGame.fxml"));
+            AnchorPane settingPane = settingLoader.load();
+            settingPlayPane.getChildren().add(settingPane);
+
+            if (settingPane != null) {
+                Button resumeButton = (Button) settingPane.lookup("#resumeGameButton");
+                resumeButton.setOnAction(e -> {
+                    closeSetting();
+                });
+
+                Button exitGameButton = (Button) settingPane.lookup("#exitGameButton");
+                exitGameButton.setOnAction(e -> {
+                    closeSetting();
+                    this.exitGame();
+                });
+
+                SettingGameController settingGameController = settingLoader.getController();
+                settingGameController.setPlayGameController(this);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        closeSetting();
+        closeHelp(null);
+        inGameSound = SoundHelper.soundInGame;
     }
 
 }
