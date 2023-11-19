@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import org.openjfx.dpeng.database.model.SoundHelper;
 import org.openjfx.dpeng.database.model.TopicDict;
 
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -25,6 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -32,15 +34,22 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class PlayGameController implements Initializable {
+    private static final Image heartFilled = new Image(PlayGameController.class.getResourceAsStream("/org/openjfx/dpeng/images/GameImage/heartFillIcon.png"));
+    private static final Image heart = new Image(PlayGameController.class.getResourceAsStream("/org/openjfx/dpeng/images/GameImage/heartIcon.png"));
+
     GameController gameController;
     MediaPlayer inGameSound;
+    int currHearts = 3;
+    int currScores = 0;
+    Timeline timeOfEachQuestion;
+    double currDurationTime;
     
     Map<String, String> currDictGame = new HashMap<String, String>(); // lưu các từ của topic hiện tại ( theo kiểu từ - nghĩa ý )
     ArrayList<String> answerList = new ArrayList<>(); // lưu các câu trả lời nè
     ArrayList<String> questionList = new ArrayList<>(); // lưu các câu hỏi theo từng câu trả lời nè (vì câu trả lời là key nên khi random chỉ cần random câu trả lời)
     String currAnswer = ""; // lưu câu trả lời của câu hỏi hiện tại nè
     ArrayList<String> answerCharacters = new ArrayList<>(); // lưu các letter của câu trả lời nè
-    String[] messagesCorrect = {"Đúng rồiiii đcmmmmmmm!!!!", "Ôiii, đỉnh quáaaa!!!",
+    String[] messagesCorrect = {"Đúng rồiiii uầyyyyyyyy!!!!", "Ôiii, đỉnh quáaaa!!!",
                                  "Chuẩn cơm mẹ nấu!!!", "Chính xác luôn!!!", 
                                  "Sao biết hay vậy!!!", "Sai vào đâu được!!!", 
                                  "Cho 100 điểm!", "Hay quá cậu ơiiii"};
@@ -75,7 +84,9 @@ public class PlayGameController implements Initializable {
         settingPlayPane.setVisible(true);
         settingPlayPane.toFront();
         settingPlayPane.setDisable(false);
-
+        if (timeOfEachQuestion != null) {
+            timeOfEachQuestion.pause();
+        }
         // SoundHelper.pauseSound(inGameSound);
     }
 
@@ -119,10 +130,26 @@ public class PlayGameController implements Initializable {
     private ProgressBar timeProgress; // Cái này để chạy thời gian
 
     @FXML
+    private ProgressBar resultAnswerProgress;
+
+    @FXML
+    private AnchorPane resultGamePane;
+
+    @FXML
+    private Label resultScoreLabel;
+
+    @FXML
+    private Label resultTotalAnswerLabel;
+
+    @FXML
+    private Button exitGameInResultButton;
+
+    @FXML
     void showHelpPane(ActionEvent event) {
         helpPane.setVisible(true);
         helpPane.toFront();
         helpPane.setDisable(false);
+        timeOfEachQuestion.pause();
     }
 
     @FXML
@@ -130,6 +157,36 @@ public class PlayGameController implements Initializable {
         helpPane.setVisible(false);
         helpPane.toBack();
         helpPane.setDisable(true);
+        if (timeOfEachQuestion != null) {
+            timeOfEachQuestion.play();
+        }
+    }
+
+    public void showResultPane() {
+        resultGamePane.setVisible(true);
+        resultGamePane.toFront();
+        resultGamePane.setDisable(false);
+        timeOfEachQuestion.stop();
+    }
+
+    public void closeResultPane() {
+        resultGamePane.setVisible(false);
+        resultGamePane.toBack();
+        resultGamePane.setDisable(true);
+    }
+
+    public void updateTimeline() {
+        if (timeOfEachQuestion != null) {
+            timeOfEachQuestion.stop();
+            timeOfEachQuestion.getKeyFrames().clear();
+        }
+        timeProgress.setProgress(1);
+        timeOfEachQuestion = new Timeline(
+                new KeyFrame(Duration.seconds(0.001*currDurationTime), event -> {
+                    timeProgress.setProgress(Math.max(0,timeProgress.getProgress() - 0.001));
+                })
+        );
+        timeOfEachQuestion.setCycleCount(Animation.INDEFINITE);
     }
 
     // Hàm này cập nhật lại câu hỏi, gọi khi next câu hỏi (khi mới hiện play game, trả lời sai, trả lời đúng)
@@ -146,7 +203,9 @@ public class PlayGameController implements Initializable {
 
         updateLetters(); // Cái này để update 2 cái FlowPane của letter trống và letter trả lời, bấm vào để đọc
         listenClickToLetters(); // Này để lắng nghe các sự kiện click vào letter nói chung, bấm vào để đọc
-
+        currDurationTime = answerCharacters.size() * 8;
+        updateTimeline();
+        timeOfEachQuestion.play();
     }
 
     // Hàm này để update các letter với câu trả lời hiện tại, gọi khi hiện play game, next câu hỏi
@@ -243,15 +302,54 @@ public class PlayGameController implements Initializable {
         String answerFromPlayer = getAnswerString();
         if (answerFromPlayer.equals(currAnswer)) {
             handleCorrectAnswer();
+            currScores += 10;
+            updateScore();
         } else {
             handleWrongAnswer();
+            currHearts = Math.max(0, currHearts - 1);
+            updateHearts();
         }
+        handleResult();
     }
 
     public void nextQuestion() {
         countFilledLetters = 0;
-        currQuestionGameIndex ++;
+        currQuestionGameIndex = Math.min(totalQuestion - 1, currQuestionGameIndex + 1);
         updateQuestion();
+    }
+
+    public void updateHearts() {
+        if (currHearts == 3) {
+            heart1.setImage(heartFilled);
+            heart2.setImage(heartFilled);
+            heart3.setImage(heartFilled);
+        } else if (currHearts == 2) {
+            heart1.setImage(heartFilled);
+            heart2.setImage(heartFilled);
+            heart3.setImage(heart);
+        } else if (currHearts == 1) {
+            heart1.setImage(heartFilled);
+            heart2.setImage(heart);
+            heart3.setImage(heart);
+        } else if (currHearts == 0) {
+            heart1.setImage(heart);
+            heart2.setImage(heart);
+            heart3.setImage(heart);
+        }
+    }
+
+    public void handleResult() {
+        if (currHearts == 0 || currQuestionGameIndex == totalQuestion - 1) {
+            resultScoreLabel.setText("Score: " + String.valueOf(currScores));
+            resultTotalAnswerLabel.setText((currScores / 10) + "/" + totalQuestion);
+            resultAnswerProgress.setProgress((double) (currScores / 10) / totalQuestion);
+
+            showResultPane();
+        }
+    }
+
+    public void updateScore() {
+        currentScoreLabel.setText(String.valueOf(currScores));
     }
 
     public void handleCorrectAnswer() {
@@ -297,9 +395,6 @@ public class PlayGameController implements Initializable {
             nextQuestion();
             timeProgress.setVisible(true);
         });
-
-
-
     }
     
     public void handleWrongAnswer() { 
@@ -367,6 +462,10 @@ public class PlayGameController implements Initializable {
 
     // Hàm này được gọi khi bấm nút "Chơi", nhận vào là tên của topic được chọn
     public void loadDictAndQuestion(String topicTitle) {
+        closeResultPane();
+        closeSetting();
+        closeHelp(null);
+        
         if (currDictGame.size() > 0 || questionList.size() > 0) { // Đầu tiên phải xoá những gì đã cũ đi đó
             questionList.clear(); // xoá danh sách câu hỏi cũ nè
             answerList.clear(); // tự hỉu nka
@@ -422,6 +521,12 @@ public class PlayGameController implements Initializable {
         totalQuestion = questionList.size(); // lấy tổng câu hỏi ra, bao nhiêu câu hỏi thì sau này tính sau
         updateQuestion(); // thực hiện gọi hàm update question
         SoundHelper.playSound(inGameSound);
+        
+        currHearts = 3;
+        updateHearts();
+
+        currScores = 0;
+        updateScore();
     }
 
     // Do lúc mới khởi tạo thì nó cũng bị ẩn đi nên hàm init cũng chưa nói lên được nhiều điều
@@ -436,6 +541,9 @@ public class PlayGameController implements Initializable {
                 Button resumeButton = (Button) settingPane.lookup("#resumeGameButton");
                 resumeButton.setOnAction(e -> {
                     closeSetting();
+                    if (timeOfEachQuestion != null) {
+                        timeOfEachQuestion.play();
+                    }
                 });
 
                 Button exitGameButton = (Button) settingPane.lookup("#exitGameButton");
@@ -452,9 +560,13 @@ public class PlayGameController implements Initializable {
             e.printStackTrace();
         }
 
-        closeSetting();
-        closeHelp(null);
+        exitGameInResultButton.setOnAction(e -> {
+            closeResultPane();
+            this.exitGame();
+        });
+
         inGameSound = SoundHelper.soundInGame;
+
     }
 
 }

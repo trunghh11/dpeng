@@ -112,10 +112,6 @@ public class GameController implements Initializable {
             playGamePane.setDisable(true); // cook nó về dưới đáy xã hội
             gamePane.setDisable(false); // Enable mấy cái topic lên để còn bấm được
 
-            // Button backToGameHomeButton = (Button) playGamePane.lookup("#backToGameHomeButton"); // tìm kiếm cái nút "trở lại" ở trong play game pane ý
-            // backToGameHomeButton.setOnAction(event -> {
-            //     backToGameHome(); // khi bấm vào cái nút này thì cho nó gọi hàm #backToGameHome
-            // });
         }
 
 
