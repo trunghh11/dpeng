@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.AppController">
+<AnchorPane fx:id="allAppPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="backgroundGradient" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.AppController">
    <children>
       <AnchorPane fx:id="appBackground" onMouseClicked="#hideMenuWhenCick" styleClass="transparentBg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,7 +30,7 @@
                         <Image url="@../images/TranslatorImage/egg.png" />
                      </image>
                   </ImageView>
-                  <AnchorPane fx:id="appAnchor" layoutX="116.83559560775757" layoutY="87.31898069381714" prefHeight="600.0" prefWidth="940.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0" />
+                  <AnchorPane fx:id="appAnchor" layoutX="116.83559560775757" layoutY="87.31898069381714" prefHeight="600.0" prefWidth="940.0" styleClass="shadow3D" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="80.0" />
                   <ImageView fitHeight="109.0" fitWidth="105.0" layoutX="968.8355956077576" layoutY="603.3189806938171" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/TranslatorImage/dinoWithEggs.png" />
@@ -41,6 +41,23 @@
                         <Image url="@../images/TranslatorImage/egg.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="dinoImage" fitHeight="70.0" fitWidth="110.0" layoutX="138.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../images/AppImage/dinoTranslateIcon.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="dinoMessage" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="0.0" textAlignment="CENTER" textFill="#333333" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0">
+                     <padding>
+                        <Insets left="30.0" right="30.0" />
+                     </padding>
+                     <font>
+                        <Font name="Arial Bold Italic" size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="appMessage" />
+                        <String fx:value="shadowInner" />
+                     </styleClass>
+                  </Label>
                </children>
             </AnchorPane>
          </children>
@@ -175,7 +192,7 @@
             <String fx:value="backGround_0_7" />
          </styleClass>
       </AnchorPane>
-      <AnchorPane fx:id="addWordPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="overlayAddWord" stylesheets="@../css/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="addWordPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" styleClass="overlayAddWord" stylesheets="@../css/styles.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="437.0" layoutY="100.0" prefHeight="440.0" prefWidth="580.0" styleClass="addWordBox" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="437.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="100.0">
                <children>

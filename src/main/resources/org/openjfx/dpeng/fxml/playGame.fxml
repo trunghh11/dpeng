@@ -17,6 +17,16 @@
    <children>
       <AnchorPane fx:id="resultGamePane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="flashBG" stylesheets="@../css/styles.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <ImageView fitHeight="600.0" fitWidth="940.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/GameImage/decor1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="140.0" layoutX="-19.0" layoutY="-35.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" rotate="-40.6">
+               <image>
+                  <Image url="@../images/GameImage/leaf1.png" />
+               </image>
+            </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="71.0" prefHeight="59.0" prefWidth="940.0" text="KẾT QUẢ" textAlignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                <font>
                   <Font name="Arial Bold" size="47.0" />
@@ -55,7 +65,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="helpPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="overlaySettingGame" stylesheets="@../css/styles.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="helpPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="overlaySettingGame" stylesheets="@../css/styles.css" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="370.0" layoutY="12.0" prefHeight="575.0" prefWidth="580.0" styleClass="settingGameBox" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="12.0">
                <children>
@@ -92,7 +102,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="settingPlayPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="settingPlayPane" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fx:id="heart3" fitHeight="35.0" fitWidth="35.0" layoutX="671.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/GameImage/heartIcon.png" />
@@ -108,7 +118,17 @@
             <Image url="@../images/GameImage/heartFillIcon.png" />
          </image>
       </ImageView>
-      <Label fx:id="progressWordLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="20.0" text="1/200" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0">
+      <ImageView fitHeight="381.0" fitWidth="271.0" layoutX="-7.0" layoutY="141.0" mouseTransparent="true" opacity="0.43" pickOnBounds="true" preserveRatio="true" rotate="-8.7">
+         <image>
+            <Image url="@../images/GameImage/decor2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="405.0" fitWidth="261.0" layoutX="679.0" layoutY="170.0" mouseTransparent="true" opacity="0.43" pickOnBounds="true" preserveRatio="true" rotate="154.2">
+         <image>
+            <Image url="@../images/GameImage/decor2.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="progressWordLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="323.0" layoutY="38.0" text="1/200" AnchorPane.leftAnchor="323.0" AnchorPane.rightAnchor="377.0">
          <font>
             <Font name="Arial Bold" size="34.0" />
          </font>

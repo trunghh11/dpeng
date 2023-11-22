@@ -10,9 +10,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="940.0" styleClass="flashBG" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.dpeng.controllers.FlashCardController">
    <children>
+      <ImageView fitHeight="600.0" fitWidth="940.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/VocabularyImage/decor1.png" />
+         </image>
+      </ImageView>
       <ScrollPane layoutX="58.0" layoutY="84.0">
          <content>
             <AnchorPane styleClass="transparentBg">
@@ -51,6 +55,11 @@
             </AnchorPane>
          </content>
       </ScrollPane>
+      <ImageView fitHeight="600.0" fitWidth="940.0" layoutY="36.0" mouseTransparent="true" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/VocabularyImage/decor2.png" />
+         </image>
+      </ImageView>
       <Button alignment="BASELINE_LEFT" layoutX="760.0" layoutY="523.0" mnemonicParsing="false" onAction="#shuffleWords" prefHeight="55.0" prefWidth="120.0" text=" Trộn" AnchorPane.bottomAnchor="26.0">
          <font>
             <Font name="Arial Bold" size="22.0" />
@@ -119,7 +128,7 @@
             <String fx:value="pressEffect" />
          </styleClass>
       </Button>
-      <Label fx:id="topicTitleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="427.0" layoutY="26.0" text="Topic: Animal" textFill="#3a3fd7" underline="true" wrapText="true" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
+      <Label fx:id="topicTitleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="427.0" layoutY="26.0" text="Topic: Animal" textFill="#333333" underline="true" wrapText="true" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0">
          <font>
             <Font name="Arial Bold" size="34.0" />
          </font>

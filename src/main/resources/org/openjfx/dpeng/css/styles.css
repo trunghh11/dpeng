@@ -12,6 +12,14 @@
     -fx-opacity: 1;
 }
 
+.shadow3D {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 4, 6);
+}
+
+.shadowInner {
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, -3, -3);
+}
+
 /* All Progress bar CSS */
 .progress-bar .bar {
     -fx-background-color: #d3fb82;
@@ -212,6 +220,11 @@
 
 
 /* -------------Menu Side bar CSS--------------*/
+.appMessage {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+}
+
 .backGround_0_7 {
     -fx-background-color: rgba(255, 255, 255, 0.7);
 }

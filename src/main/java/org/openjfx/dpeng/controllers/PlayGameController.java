@@ -18,7 +18,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,6 +31,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.media.MediaPlayer;
@@ -75,8 +79,6 @@ public class PlayGameController implements Initializable {
         settingPlayPane.setVisible(false);
         settingPlayPane.toBack();
         settingPlayPane.setDisable(true);
-
-        SoundHelper.playSound(inGameSound);
     }
 
     @FXML
@@ -163,6 +165,9 @@ public class PlayGameController implements Initializable {
     }
 
     public void showResultPane() {
+        SoundHelper.stopSound(inGameSound);
+        SoundHelper.soundShowResult.play();
+        
         resultGamePane.setVisible(true);
         resultGamePane.toFront();
         resultGamePane.setDisable(false);
@@ -189,6 +194,10 @@ public class PlayGameController implements Initializable {
         timeOfEachQuestion.setCycleCount(Animation.INDEFINITE);
     }
 
+    public void showCorrectAnswer() {
+        questionLabel.setText("Đáp án: " + answerList.get(currQuestionGameIndex));
+    }
+
     // Hàm này cập nhật lại câu hỏi, gọi khi next câu hỏi (khi mới hiện play game, trả lời sai, trả lời đúng)
     public void updateQuestion() {
         questionLabel.setText(questionList.get(currQuestionGameIndex)); // lấy câu hỏi tại vị trí câu hỏi hiện tại ra rồi nhét vào #questionLabel
@@ -203,7 +212,7 @@ public class PlayGameController implements Initializable {
 
         updateLetters(); // Cái này để update 2 cái FlowPane của letter trống và letter trả lời, bấm vào để đọc
         listenClickToLetters(); // Này để lắng nghe các sự kiện click vào letter nói chung, bấm vào để đọc
-        currDurationTime = answerCharacters.size() * 8;
+        currDurationTime = answerCharacters.size() * 5;
         updateTimeline();
         timeOfEachQuestion.play();
     }
@@ -239,6 +248,17 @@ public class PlayGameController implements Initializable {
             if (letter instanceof AnchorPane) {
                 AnchorPane letterPane = (AnchorPane) letter;
                 Label letterLabel = (Label) letterPane.getChildren().get(0); // lấy ra label của letter này
+                EventHandler<MouseEvent> pushEvent =  new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        // SoundHelper.soundClick.stop();
+                        SoundHelper.soundPushLetter.play();
+                        mouseEvent.consume();
+                    }
+                };
+
+                letterPane.addEventFilter(MouseEvent.MOUSE_PRESSED, pushEvent);
+
                 letterPane.setOnMouseClicked(e -> {
                     answerLetterFlowPane.getChildren().remove(letter); // khi click vào phải xoá luôn cả cái letter này trong #answerLetterFlowPane
                     fillLetter(letterLabel); // gọi hàm #fillLetter để fill letter được chọn vào letter trống đầu tiên, bấm vào để đọc thêm
@@ -251,6 +271,17 @@ public class PlayGameController implements Initializable {
         for (Node letterFill : fillLetterFlowPane.getChildren()) {
             if (letterFill instanceof AnchorPane) {
                 AnchorPane letterFillPane = (AnchorPane) letterFill; // lấy cả letter ra dưới dạng AnchorPane
+                EventHandler<MouseEvent> popEvent =  new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        // SoundHelper.soundClick.stop();
+                        SoundHelper.soundPopLetter.play();
+                        mouseEvent.consume();
+                    }
+                };
+
+                letterFillPane.addEventFilter(MouseEvent.MOUSE_PRESSED, popEvent);
+                
                 letterFillPane.setOnMouseClicked(e -> {
                     unFillLetter(letterFillPane); // thực hiện nhấc letter bị unFill để nhét vào #answerLetterFlowPane, bấm vào để đọc chi tiết
                 });
@@ -295,26 +326,36 @@ public class PlayGameController implements Initializable {
     }
 
     public void checkAndHandleAnswer() {
-        if (countFilledLetters < answerCharacters.size()) {
+        if (countFilledLetters < answerCharacters.size() && timeProgress.getProgress() > 0) {
             return;
         }
 
+        timeOfEachQuestion.pause();
+
         String answerFromPlayer = getAnswerString();
         if (answerFromPlayer.equals(currAnswer)) {
+            showCorrectAnswer();
+            SoundHelper.soundCorrect.play();
             handleCorrectAnswer();
             currScores += 10;
             updateScore();
         } else {
+            showCorrectAnswer();
+            SoundHelper.soundInCorrect.play();
             handleWrongAnswer();
             currHearts = Math.max(0, currHearts - 1);
             updateHearts();
         }
-        handleResult();
+
     }
 
     public void nextQuestion() {
         countFilledLetters = 0;
-        currQuestionGameIndex = Math.min(totalQuestion - 1, currQuestionGameIndex + 1);
+        currQuestionGameIndex ++;
+        if (currQuestionGameIndex >= totalQuestion) {
+            return;
+        }
+
         updateQuestion();
     }
 
@@ -339,7 +380,7 @@ public class PlayGameController implements Initializable {
     }
 
     public void handleResult() {
-        if (currHearts == 0 || currQuestionGameIndex == totalQuestion - 1) {
+        if (currHearts == 0 || currQuestionGameIndex >= totalQuestion) {
             resultScoreLabel.setText("Score: " + String.valueOf(currScores));
             resultTotalAnswerLabel.setText((currScores / 10) + "/" + totalQuestion);
             resultAnswerProgress.setProgress((double) (currScores / 10) / totalQuestion);
@@ -354,6 +395,7 @@ public class PlayGameController implements Initializable {
 
     public void handleCorrectAnswer() {
         
+
         for (Node letter : fillLetterFlowPane.getChildren()) {
             RotateTransition correctAnimation = new RotateTransition(Duration.seconds(0.2));
             correctAnimation.setFromAngle(-15);
@@ -394,10 +436,13 @@ public class PlayGameController implements Initializable {
             messageFlowPane.getChildren().clear();
             nextQuestion();
             timeProgress.setVisible(true);
+            handleResult();
         });
     }
     
     public void handleWrongAnswer() { 
+        
+
         for (Node letter : fillLetterFlowPane.getChildren()) {
             RotateTransition wrongAnimation = new RotateTransition(Duration.seconds(0.15));
             wrongAnimation.setFromAngle(-10);
@@ -439,6 +484,7 @@ public class PlayGameController implements Initializable {
             messageFlowPane.getChildren().clear();
             nextQuestion();
             timeProgress.setVisible(true);
+            handleResult();
         });
         
     }
@@ -453,8 +499,12 @@ public class PlayGameController implements Initializable {
         for (Node letterFilledNode : fillLetterFlowPane.getChildren()) {
             if (letterFilledNode instanceof AnchorPane) {
                 AnchorPane letterFilled = (AnchorPane) letterFilledNode;
-                Label answerLabel = (Label) letterFilled.getChildren().get(0);
-                result += answerLabel.getText();
+                if (letterFilled.getChildren().size() > 0) {
+                    Label answerLabel = (Label) letterFilled.getChildren().get(0);
+                    result += answerLabel.getText();
+                } else {
+                    break;
+                }
             }
         }
         return result;
@@ -565,7 +615,19 @@ public class PlayGameController implements Initializable {
             this.exitGame();
         });
 
+        timeProgress.progressProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if ((double) newValue == 0) {
+                    checkAndHandleAnswer();
+                }
+            }
+            
+        });
+
         inGameSound = SoundHelper.soundInGame;
+        inGameSound.setCycleCount(MediaPlayer.INDEFINITE);
 
     }
 

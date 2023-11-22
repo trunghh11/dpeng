@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.openjfx.dpeng.database.model.SoundHelper;
+
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -18,6 +20,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -25,8 +29,23 @@ import javafx.util.Duration;
 public class AppController implements Initializable {
     // private boolean isTranslate, isVoca, isGame, isDict;
     private static boolean isMenuOn = false;
+    private static Timeline messageSlideInAnimation;
     private static Timeline menuSlideInAnimation;
     private static Timeline menuSlideOutAnimation;
+    private static final int TRANSLATE_TAB = 1;
+    private static final int VOCA_TAB = 2;
+    private static final int GAME_TAB = 3;
+    private static final int DICT_TAB = 4;
+    int currTab;
+
+    @FXML
+    private ImageView dinoImage;
+
+    @FXML
+    private Label dinoMessage;
+
+    @FXML
+    private AnchorPane allAppPane;
 
     @FXML
     private AnchorPane appAnchor;
@@ -171,15 +190,32 @@ public class AppController implements Initializable {
 
     @FXML
     private void switchToTranslateView(ActionEvent event) {
+        if (currTab == TRANSLATE_TAB) {
+            return;
+        }
+        Image dinoImg = new Image(getClass().getResourceAsStream("/org/openjfx/dpeng/images/AppImage/dinoTranslateIcon.png"));
+        dinoImage.setImage(dinoImg);
+
+        dinoMessage.setPrefWidth(0);
+        dinoMessage.setText("");
+        messageSlideInAnimation.play();
+        messageSlideInAnimation.setOnFinished(e -> {
+            dinoMessage.setText("Cùng dịch nhé!");
+        });
+
         try {
             if (isMenuOn) {
                 slideOutMenu();
             }
+
+            SoundHelper.stopGameSound();
+
             FXMLLoader translateLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/translate.fxml"));
             AnchorPane rootTranslate = translateLoader.load();
 
             appAnchor.getChildren().clear();
             appAnchor.getChildren().add(rootTranslate);
+            currTab = 1;
 
             translateButton.getStyleClass().add("active");
             vocaButton.getStyleClass().removeAll("active");
@@ -193,15 +229,32 @@ public class AppController implements Initializable {
 
     @FXML
     private void switchToVocaView(ActionEvent event) {
+        if (currTab == VOCA_TAB) {
+            return;
+        }
+        Image dinoImg = new Image(getClass().getResourceAsStream("/org/openjfx/dpeng/images/AppImage/dinoVocaIcon.png"));
+        dinoImage.setImage(dinoImg);
+
+        dinoMessage.setPrefWidth(0);
+        dinoMessage.setText("");
+        messageSlideInAnimation.play();
+        messageSlideInAnimation.setOnFinished(e -> {
+            dinoMessage.setText("Cùng ôn từ vựng nhé!");
+        });
+
         try {
             if (isMenuOn) {
                 slideOutMenu();
             }
+
+            SoundHelper.stopGameSound();
+
             FXMLLoader vocaLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/vocabulary.fxml"));
             AnchorPane rootVoca = vocaLoader.load();
 
             appAnchor.getChildren().clear();
             appAnchor.getChildren().add(rootVoca);
+            currTab = 2;
 
             translateButton.getStyleClass().removeAll("active");
             vocaButton.getStyleClass().add("active");
@@ -217,6 +270,20 @@ public class AppController implements Initializable {
 
     @FXML
     private void switchToGameView(ActionEvent event) {
+        if (currTab == GAME_TAB) {
+            return;
+        }
+        Image dinoImg = new Image(getClass().getResourceAsStream("/org/openjfx/dpeng/images/AppImage/dinoGameIcon.png"));
+        dinoImage.setImage(dinoImg);
+        
+
+        dinoMessage.setPrefWidth(0);
+        dinoMessage.setText("");
+        messageSlideInAnimation.play();
+        messageSlideInAnimation.setOnFinished(e -> {
+            dinoMessage.setText("Cùng chơi game nhé!");
+        });
+        
         try {
             if (isMenuOn) {
                 slideOutMenu();
@@ -226,6 +293,7 @@ public class AppController implements Initializable {
 
             appAnchor.getChildren().clear();
             appAnchor.getChildren().add(rootGame);
+            currTab = 3;
 
             translateButton.getStyleClass().removeAll("active");
             vocaButton.getStyleClass().removeAll("active");
@@ -242,15 +310,33 @@ public class AppController implements Initializable {
 
     @FXML
     private void switchToDictView(ActionEvent event) {
+        if (currTab == DICT_TAB) {
+            return;
+        }
+        Image dinoImg = new Image(getClass().getResourceAsStream("/org/openjfx/dpeng/images/AppImage/dinoDictIcon.png"));
+        dinoImage.setImage(dinoImg);
+        
+        dinoMessage.setPrefWidth(0);
+        dinoMessage.setText("");
+        messageSlideInAnimation.play();
+        messageSlideInAnimation.setOnFinished(e -> {
+            dinoMessage.setText("Cùng tra từ điển nhé!");
+        });
+
         try {
             if (isMenuOn) {
                 slideOutMenu();
             }
+
+            SoundHelper.stopGameSound();
+
             FXMLLoader dictLoader = new FXMLLoader(getClass().getResource("/org/openjfx/dpeng/fxml/dictionary.fxml"));
             AnchorPane rootDict = dictLoader.load();
 
             appAnchor.getChildren().clear();
             appAnchor.getChildren().add(rootDict);
+            currTab = 4;
+
             Button showAddWordButton = (Button) rootDict.lookup("#addWordButton");
             Button showEditWordButton = (Button) rootDict.lookup("#editWordButton");
 
@@ -301,6 +387,25 @@ public class AppController implements Initializable {
             AnchorPane rootTranslate = translateLoader.load();
 
             appAnchor.getChildren().add(rootTranslate);
+            currTab = 1;
+
+            messageSlideInAnimation = new Timeline();
+            Duration durationMessage = Duration.seconds(1);
+
+            // Tạo KeyValue cho bước chuyển đổi chiều rộng
+            KeyValue keyValueMessage = new KeyValue(dinoMessage.prefWidthProperty(), 285);
+
+            // Tạo KeyFrame cho bước chuyển đổi chiều rộng
+            KeyFrame keyFrameMessage = new KeyFrame(durationMessage, keyValueMessage);
+
+            // Thêm KeyFrame vào Timeline
+            messageSlideInAnimation.getKeyFrames().add(keyFrameMessage);
+
+            dinoMessage.setPrefWidth(0);
+            messageSlideInAnimation.play();
+            messageSlideInAnimation.setOnFinished(e -> {
+                dinoMessage.setText("Cùng dịch nhé!");
+            });
 
         }
         catch (IOException e) {
