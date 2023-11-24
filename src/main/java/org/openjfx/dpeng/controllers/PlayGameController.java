@@ -209,6 +209,7 @@ public class PlayGameController implements Initializable {
         for(int i = 0; i < currAnswer.length(); i++) {
             answerCharacters.add(String.valueOf(currAnswer.charAt(i))); // add từng cái vào #answerCharacters
         }
+        Collections.shuffle(answerCharacters);
 
         updateLetters(); // Cái này để update 2 cái FlowPane của letter trống và letter trả lời, bấm vào để đọc
         listenClickToLetters(); // Này để lắng nghe các sự kiện click vào letter nói chung, bấm vào để đọc

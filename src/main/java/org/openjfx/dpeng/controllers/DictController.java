@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.openjfx.dpeng.database.dao.VietAnhDAO;
 import org.openjfx.dpeng.database.dao.DictionaryDAO;
 import org.openjfx.dpeng.database.model.Word;
 
@@ -15,12 +16,15 @@ import com.voicerss.tts.Languages;
 import com.voicerss.tts.VoiceParameters;
 import com.voicerss.tts.VoiceProvider;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -34,6 +38,8 @@ import javafx.scene.web.WebView;
 
 public class DictController implements Initializable {
     private static ArrayList<String> historySearch = new ArrayList<String>();
+    private static ArrayList<String> historyVASearch = new ArrayList<String>();
+    private static ArrayList<String> historyAVSearch = new ArrayList<String>();
     public static Word currWordResult = null;
     private static final String voiceApi = "8aa655c9fcfd4f23b8e11593e22f9131";
     private static final String keyWordVoicePath = "./voices/word.mp3";
@@ -257,7 +263,12 @@ public class DictController implements Initializable {
     void searchExactWord(ActionEvent event) {
         String exactKWord = searchWordField.getText();
 
-        Word exactWord = DictionaryDAO.getInstance().selectByKeyWord(exactKWord);
+        Word exactWord = null;
+        if (currentDict.equals("vi")) {
+            exactWord = VietAnhDAO.getInstance().selectByKeyWord(exactKWord);
+        } else {
+            exactWord = DictionaryDAO.getInstance().selectByKeyWord(exactKWord);
+        }
 
         if (exactWord != null) {
             currWordResult = exactWord;
@@ -284,7 +295,11 @@ public class DictController implements Initializable {
         String htmlDes = convertTextToHtml(textDes);
 
         Word newWord = new Word(keyWord, textDes, htmlDes);
-        DictionaryDAO.getInstance().insert(newWord);
+        if (currentDict.equals("vi")) {
+            VietAnhDAO.getInstance().insert(newWord);
+        } else {
+            DictionaryDAO.getInstance().insert(newWord);
+        }
 
         currWordResult = newWord;
         addWordToHistory(capFirstLetter(currWordResult.getKey()));
@@ -292,6 +307,12 @@ public class DictController implements Initializable {
     }
 
     public static void addWordToHistory(String word) {
+        if (currentDict.equals("vi")) {
+            historySearch = historyVASearch;
+        } else {
+            historySearch = historyAVSearch;
+        }
+
         if (historySearch.contains(word)) {
             historySearch.remove(word);
         }
@@ -304,7 +325,12 @@ public class DictController implements Initializable {
     }
 
     public void addWordToResultView(String kword) {
-        Word wordResult = DictionaryDAO.getInstance().selectByKeyWord(kword);
+        Word wordResult = null;
+        if (currentDict.equals("vi")) {
+            wordResult = VietAnhDAO.getInstance().selectByKeyWord(kword);
+        } else {
+            wordResult = DictionaryDAO.getInstance().selectByKeyWord(kword);
+        }
         currWordResult = wordResult;
 
         String fullResult= resultHTMLTemplate.replace("<body>", "<body>" + wordResult.getHtmlDescription());
@@ -334,7 +360,11 @@ public class DictController implements Initializable {
 
         suggestAndHistoryLabel.setText("Kết quả");
         ArrayList<String> suggestWords = new ArrayList<>();
-        suggestWords = DictionaryDAO.getInstance().suggestByKeyWord(keyWord);
+        if (currentDict.equals("vi")) {
+            suggestWords = VietAnhDAO.getInstance().suggestByKeyWord(keyWord);
+        } else {
+            suggestWords = DictionaryDAO.getInstance().suggestByKeyWord(keyWord);
+        }
 
         suggestAndHistoryBox.getChildren().clear();
         
@@ -431,16 +461,27 @@ public class DictController implements Initializable {
             return;
         }
         
-        Alert alertDelete = new Alert(AlertType.CONFIRMATION);
+        Alert alertDelete = new Alert(AlertType.ERROR);
         alertDelete.setTitle("XOÁ TỪ");
         alertDelete.setHeaderText("BẠN ĐANG XOÁ TỪ??");
         alertDelete.setContentText("Hãy chắc chắn rằng bạn muốn xoá từ này!");
 
-        if (alertDelete.showAndWait().get() == ButtonType.OK) {
+        ButtonType CANCEL = new ButtonType("Thôi không xoá nữa", ButtonData.CANCEL_CLOSE);
+        alertDelete.getButtonTypes().add(CANCEL);
+
+        ButtonType OK = new ButtonType("Xoá luônnn", ButtonData.OK_DONE);
+        alertDelete.getDialogPane().getStylesheets().add(getClass().getResource("/org/openjfx/dpeng/css/alert.css").toExternalForm());
+        alertDelete.getButtonTypes().remove(ButtonType.OK);
+        alertDelete.getButtonTypes().add(OK);
+
+        if (alertDelete.showAndWait().get() == OK) {
             historySearch.remove(capFirstLetter(currWordResult.getKey()));
             resultWordView.getEngine().loadContent("");
-
-            DictionaryDAO.getInstance().delete(currWordResult);
+            if (currentDict.equals("vi")) {
+                VietAnhDAO.getInstance().delete(currWordResult);
+            } else {
+                DictionaryDAO.getInstance().delete(currWordResult);
+            }
             showWordSuggestions(searchWordField.getText());
             currWordResult = null;
             lastKeyWord = "";
@@ -457,8 +498,38 @@ public class DictController implements Initializable {
         addWordPane.setVisible(false);
         addWordPane.toBack();
         
-        dictChoice.setValue("Anh - Việt");
+        if (currentDict.equals("vi")) {
+            dictChoice.setValue("Việt - Anh");
+        } else {
+            dictChoice.setValue("Anh - Việt");
+        }
         dictChoice.getItems().addAll("Anh - Việt", "Việt - Anh");
+        dictChoice.valueProperty().addListener(new ChangeListener<String>(){
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.equals("Việt - Anh")) {
+                    if (currentDict.equals("en")) {
+                        historyAVSearch = historySearch;
+                        currentDict = "vi";
+                        historySearch = historyVASearch;
+                        currWordResult = null;
+                        updateResultView();
+                        showWordHistory();
+                    }
+                } else {
+                    if (currentDict.equals("vi")) {
+                        historyVASearch = historySearch;
+                        currentDict = "en";
+                        historySearch = historyAVSearch;
+                        currWordResult = null;
+                        updateResultView();
+                        showWordHistory();
+                    }
+                }
+            }
+
+        });
 
         searchWordField.textProperty().addListener((observable, oldValue, newValue) -> {
             showWordSuggestions(newValue);
